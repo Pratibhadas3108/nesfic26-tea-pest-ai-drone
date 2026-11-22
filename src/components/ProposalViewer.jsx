@@ -396,8 +396,15 @@ export default function ProposalViewer() {
 
           <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800">
             <span className="text-slate-400 block font-medium">Product / Website URL:</span>
-            <span className="text-white font-mono mt-1 block">http://localhost:5173</span>
-            <span className="text-[10px] text-emerald-400 mt-1 block">Live interactive web application</span>
+            <a
+              href="https://nesfic-i-07-drone-pest-detection.pages.dev"
+              target="_blank"
+              rel="noreferrer"
+              className="text-emerald-400 hover:underline font-mono mt-1 block truncate"
+            >
+              https://nesfic-i-07-drone-pest-detection.pages.dev
+            </a>
+            <span className="text-[10px] text-emerald-400 mt-1 block">Live Cloudflare Pages deployment</span>
           </div>
         </div>
       </div>

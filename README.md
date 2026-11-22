@@ -3,10 +3,16 @@
 *A Flagship Solution for North East Seva First Innovation Challenge (NESFIC) 2026 — Government Track*  
 *Developed in collaboration with the Tea Research Association (TRA) Tocklai (New Technology Committee)*
 
+[![Cloudflare Pages](https://img.shields.io/badge/Live%20Demo-Cloudflare%20Pages-orange.svg)](https://nesfic-i-07-drone-pest-detection.pages.dev)
 [![Assam Startup](https://img.shields.io/badge/NESFIC-2026-emerald.svg)](https://startup.assam.gov.in)
 [![DGCA Drone Rules](https://img.shields.io/badge/DGCA-Green%20Zone%20Compliant-blue.svg)](https://digitalsky.dgca.gov.in)
 [![TRA PPC](https://img.shields.io/badge/TRA%20Tocklai-PPC%20Validated-teal.svg)](https://www.tocklai.org)
 [![MRL Export](https://img.shields.io/badge/MRL-EU%20%26%20FSSAI%20Pass-green.svg)](#)
+
+---
+
+## 🌐 Live Application
+- **Cloudflare Pages Production URL:** [https://nesfic-i-07-drone-pest-detection.pages.dev](https://nesfic-i-07-drone-pest-detection.pages.dev)
 
 ---
 
