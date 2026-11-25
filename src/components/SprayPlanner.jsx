@@ -84,19 +84,19 @@ export default function SprayPlanner() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+      {/* Header - White Corporate */}
+      <div className="bg-white border border-slate-200 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Droplet className="w-4 h-4 text-emerald-400" />
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <Droplet className="w-4 h-4 text-blue-700" />
               Variable-Rate Spot-Spraying (VRA) Prescription Planner
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-bold">
               RTK Centimeter Nozzle Actuation
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Generates MAVLink / GeoJSON prescription missions to open solenoid valves only above verified pest micro-clusters
           </p>
         </div>
@@ -105,19 +105,19 @@ export default function SprayPlanner() {
         <div className="flex items-center gap-2">
           <button
             onClick={downloadPrescriptionGeoJSON}
-            className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-all"
+            className="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-blue-700" />
             <span>Export GeoJSON / KML</span>
           </button>
 
           <button
             onClick={handleArmMission}
             disabled={missionArmed && missionProgress < 100}
-            className={`px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-2 shadow-lg transition-all ${
+            className={`px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-2 shadow-sm transition-all ${
               missionArmed && missionProgress < 100
                 ? 'bg-amber-600 text-white cursor-wait'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/30 hover:scale-[1.02]'
+                : 'bg-blue-700 hover:bg-blue-800 text-white hover:scale-[1.02]'
             }`}
           >
             <Plane className="w-4 h-4" />
@@ -132,56 +132,56 @@ export default function SprayPlanner() {
         </div>
       </div>
 
-      {/* Chemical Savings & Quantitative ROI Card */}
+      {/* Chemical Savings & Quantitative ROI Card - White / Light Gray */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-emerald-950/60 to-slate-900 border border-emerald-500/30 rounded-xl p-5">
-          <span className="text-xs font-semibold uppercase text-emerald-400 tracking-wider">
+        <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-5 shadow-sm">
+          <span className="text-xs font-bold uppercase text-emerald-800 tracking-wider">
             Chemical Reduction
           </span>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">{savingsPercent}%</span>
-            <span className="text-xs font-bold text-emerald-400">Pesticide Saved</span>
+            <span className="text-3xl font-extrabold text-emerald-950">{savingsPercent}%</span>
+            <span className="text-xs font-bold text-emerald-700">Pesticide Saved</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-2">
+          <p className="text-[11px] text-emerald-800 mt-2 font-medium">
             Spot-spraying uses {spotVolumeL} L vs {blanketVolumeL} L blanket drenching
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <span className="text-xs font-semibold uppercase text-slate-400 tracking-wider">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">
             Agrochemical Saved
           </span>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">{savedVolumeL}</span>
-            <span className="text-xs font-semibold text-slate-300">Liters / round</span>
+            <span className="text-3xl font-extrabold text-slate-900">{savedVolumeL}</span>
+            <span className="text-xs font-semibold text-slate-500">Liters / round</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-2">
             Zero runoff into garden perimeter drainage systems
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <span className="text-xs font-semibold uppercase text-slate-400 tracking-wider">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">
             Cost Saved / Cycle
           </span>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">₹{Number(costSavingsINR).toLocaleString()}</span>
-            <span className="text-xs font-semibold text-emerald-400">Direct Savings</span>
+            <span className="text-3xl font-extrabold text-slate-900">₹{Number(costSavingsINR).toLocaleString()}</span>
+            <span className="text-xs font-bold text-emerald-700">Direct Savings</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-2">
             Based on current tea estate chemical procurement rates
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <span className="text-xs font-semibold uppercase text-slate-400 tracking-wider">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+          <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">
             Water Saved
           </span>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white">420</span>
-            <span className="text-xs font-semibold text-slate-300">Liters Water</span>
+            <span className="text-3xl font-extrabold text-slate-900">420</span>
+            <span className="text-xs font-semibold text-slate-500">Liters Water</span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-2">
+          <p className="text-[11px] text-slate-500 mt-2">
             Ultra-Low Volume (ULV) atomization efficiency
           </p>
         </div>
@@ -193,35 +193,35 @@ export default function SprayPlanner() {
         <div className="lg:col-span-2 space-y-4">
           {/* Mission Progress Bar if armed */}
           {missionArmed && (
-            <div className="bg-slate-900 border border-emerald-500/40 rounded-xl p-4 space-y-2">
+            <div className="bg-white border border-blue-300 rounded-xl p-4 space-y-2 shadow-sm">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-emerald-400 flex items-center gap-1.5">
-                  <Radio className="w-4 h-4 animate-pulse text-emerald-400" />
+                <span className="font-bold text-blue-800 flex items-center gap-1.5">
+                  <Radio className="w-4 h-4 animate-pulse text-blue-600" />
                   Live RTK Spot-Spraying Mission in Progress • Section 4B
                 </span>
-                <span className="font-mono text-white font-bold">{missionProgress}%</span>
+                <span className="font-mono text-slate-900 font-bold">{missionProgress}%</span>
               </div>
-              <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                  className="bg-blue-600 h-full rounded-full transition-all duration-500"
                   style={{ width: `${missionProgress}%` }}
                 />
               </div>
-              <div className="flex justify-between text-[11px] text-slate-400 pt-1">
+              <div className="flex justify-between text-[11px] text-slate-500 pt-1">
                 <span>Waypoint {Math.min(9, Math.ceil((missionProgress / 100) * 9))} of 9</span>
                 <span>Altitude: 18m AGL • Flow: 1.2 L/min</span>
               </div>
             </div>
           )}
 
-          {/* Hotspot Target Queue */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+          {/* Hotspot Target Queue - White Corporate */}
+          <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
               <div>
-                <h3 className="text-sm font-bold text-white">Targeted Micro-Clusters ({selectedSection.hotspotsCount})</h3>
-                <p className="text-xs text-slate-400">Coordinate actuation points for Section 4B</p>
+                <h3 className="text-sm font-bold text-slate-900">Targeted Micro-Clusters ({selectedSection.hotspotsCount})</h3>
+                <p className="text-xs text-slate-500">Coordinate actuation points for Section 4B</p>
               </div>
-              <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+              <span className="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200 font-mono">
                 Centimeter RTK-Fix
               </span>
             </div>
@@ -230,29 +230,29 @@ export default function SprayPlanner() {
               {DETECTED_HOTSPOTS.map((hs, idx) => (
                 <div
                   key={hs.id}
-                  className="p-3 rounded-lg bg-slate-950/70 border border-slate-800 flex items-center justify-between gap-4 text-xs"
+                  className="p-3 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between gap-4 text-xs hover:border-blue-300 transition-all"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded-full bg-slate-800 font-mono font-bold text-slate-300 flex items-center justify-center text-[11px]">
+                    <span className="w-6 h-6 rounded-full bg-slate-200 font-mono font-bold text-slate-700 flex items-center justify-center text-[11px]">
                       {idx + 1}
                     </span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <strong className="text-white font-mono">{hs.id}</strong>
-                        <span className="italic text-slate-300 font-medium">({hs.pestName})</span>
-                        <span className="text-[10px] px-1.5 rounded bg-rose-500/20 text-rose-300 font-bold">
+                        <strong className="text-slate-900 font-mono">{hs.id}</strong>
+                        <span className="italic text-slate-700 font-medium">({hs.pestName})</span>
+                        <span className="text-[10px] px-1.5 rounded bg-rose-100 text-rose-800 font-bold">
                           {hs.severity}
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                      <p className="text-[11px] text-slate-500 font-mono mt-0.5">
                         Lat: {hs.lat.toFixed(5)}, Lng: {hs.lng.toFixed(5)} • Radius: {hs.affectedRadiusMeters}m
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <span className="font-mono text-emerald-400 font-bold block">{hs.spotSprayVolumeL} L</span>
-                    <span className="text-[10px] text-slate-400">PWM Duty: 75%</span>
+                    <span className="font-mono text-emerald-700 font-bold block">{hs.spotSprayVolumeL} L</span>
+                    <span className="text-[10px] text-slate-500 font-medium">PWM Duty: 75%</span>
                   </div>
                 </div>
               ))}
@@ -262,16 +262,16 @@ export default function SprayPlanner() {
 
         {/* Right 1 Col: Solenoid Nozzle Parameters & Droplet Simulation */}
         <div className="space-y-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-            <h3 className="text-sm font-bold text-white border-b border-slate-800 pb-2">
+          <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-4 shadow-sm">
+            <h3 className="text-sm font-bold text-slate-900 border-b border-slate-200 pb-2">
               Solenoid & Droplet Configuration
             </h3>
 
             {/* Slider 1: PWM Frequency */}
             <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between text-slate-300">
+              <div className="flex justify-between text-slate-700 font-medium">
                 <span>PWM Pulse Frequency:</span>
-                <span className="font-mono font-bold text-emerald-400">{pwmFrequencyHz} Hz</span>
+                <span className="font-mono font-bold text-blue-700">{pwmFrequencyHz} Hz</span>
               </div>
               <input
                 type="range"
@@ -279,16 +279,16 @@ export default function SprayPlanner() {
                 max="50"
                 value={pwmFrequencyHz}
                 onChange={(e) => setPwmFrequencyHz(Number(e.target.value))}
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-blue-700 cursor-pointer"
               />
               <span className="text-[10px] text-slate-500">Regulates high-frequency micro-burst timing</span>
             </div>
 
             {/* Slider 2: Droplet Size */}
             <div className="space-y-1.5 text-xs">
-              <div className="flex justify-between text-slate-300">
+              <div className="flex justify-between text-slate-700 font-medium">
                 <span>Droplet VMD Spectrum:</span>
-                <span className="font-mono font-bold text-emerald-400">{dropletSizeMicrons} µm</span>
+                <span className="font-mono font-bold text-blue-700">{dropletSizeMicrons} µm</span>
               </div>
               <input
                 type="range"
@@ -296,21 +296,21 @@ export default function SprayPlanner() {
                 max="300"
                 value={dropletSizeMicrons}
                 onChange={(e) => setDropletSizeMicrons(Number(e.target.value))}
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-blue-700 cursor-pointer"
               />
               <span className="text-[10px] text-slate-500">Anti-drift envelope to prevent off-target runoff</span>
             </div>
 
             {/* Water Sensitive Paper (WSP) Simulation Preview */}
-            <div className="mt-4 p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <span className="text-xs font-bold text-white block">
+            <div className="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <span className="text-xs font-bold text-slate-900 block">
                 Water-Sensitive Paper (WSP) Card Simulator
               </span>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 Canopy penetration validation: Target &gt;70 droplets/cm²
               </p>
               
-              <div className="h-20 rounded bg-amber-200 relative overflow-hidden flex items-center justify-center p-2 border border-amber-300">
+              <div className="h-20 rounded bg-amber-100 relative overflow-hidden flex items-center justify-center p-2 border border-amber-300">
                 {/* Simulated droplet dots on yellow paper */}
                 <div className="w-full h-full relative">
                   {[...Array(35)].map((_, i) => (
@@ -326,7 +326,7 @@ export default function SprayPlanner() {
                     />
                   ))}
                 </div>
-                <div className="absolute bottom-1 right-1 bg-slate-900/80 px-1.5 py-0.5 rounded text-[9px] font-mono text-emerald-400">
+                <div className="absolute bottom-1 right-1 bg-white/95 px-1.5 py-0.5 rounded text-[9px] font-mono text-emerald-800 font-bold border border-slate-200 shadow-sm">
                   Density: 82 droplets/cm² (OPTIMAL)
                 </div>
               </div>

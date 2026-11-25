@@ -129,25 +129,25 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
   return (
     <div className="space-y-4">
       {/* Top Map Control Bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Crosshair className="w-4 h-4 text-emerald-400" />
+          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <Crosshair className="w-4 h-4 text-blue-700" />
             Tea Garden Geospatial GIS Engine • Section 4B (Jorhat)
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500">
             Centimeter-accurate RTK coordinate mapping of tea bush canopies and pest clusters
           </p>
         </div>
 
         {/* Flight Simulation Controls */}
-        <div className="flex items-center gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs">
+        <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs">
           <button
             onClick={() => setIsSimulating(!isSimulating)}
             className={`px-3 py-1.5 rounded-md font-semibold flex items-center gap-1.5 transition-all ${
               isSimulating
-                ? 'bg-rose-500 text-white'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                ? 'bg-rose-600 text-white shadow-sm'
+                : 'bg-blue-700 hover:bg-blue-800 text-white shadow-sm'
             }`}
           >
             {isSimulating ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -159,7 +159,7 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
               setIsSimulating(false);
               setDroneStep(0);
             }}
-            className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-slate-200"
+            className="p-1.5 rounded-md hover:bg-slate-200 text-slate-600 hover:text-slate-900"
             title="Reset flight path"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -170,37 +170,37 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
         <div className="flex items-center gap-1.5 text-xs">
           <button
             onClick={() => toggleLayer('hotspots')}
-            className={`px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1 transition-all ${
+            className={`px-2.5 py-1 rounded-lg border font-semibold flex items-center gap-1 transition-all ${
               activeLayers.hotspots
-                ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                : 'bg-slate-800 text-slate-400 border-slate-700'
+                ? 'bg-rose-50 text-rose-700 border-rose-300'
+                : 'bg-slate-100 text-slate-600 border-slate-200'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+            <span className="w-2 h-2 rounded-full bg-rose-600"></span>
             Pest Hotspots ({DETECTED_HOTSPOTS.length})
           </button>
 
           <button
             onClick={() => toggleLayer('sprayRadius')}
-            className={`px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1 transition-all ${
+            className={`px-2.5 py-1 rounded-lg border font-semibold flex items-center gap-1 transition-all ${
               activeLayers.sprayRadius
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                : 'bg-slate-800 text-slate-400 border-slate-700'
+                ? 'bg-amber-50 text-amber-700 border-amber-300'
+                : 'bg-slate-100 text-slate-600 border-slate-200'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span className="w-2 h-2 rounded-full bg-amber-500"></span>
             VRA Spot Buffers
           </button>
 
           <button
             onClick={() => toggleLayer('flightPath')}
-            className={`px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1 transition-all ${
+            className={`px-2.5 py-1 rounded-lg border font-semibold flex items-center gap-1 transition-all ${
               activeLayers.flightPath
-                ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                : 'bg-slate-800 text-slate-400 border-slate-700'
+                ? 'bg-blue-50 text-blue-700 border-blue-300'
+                : 'bg-slate-100 text-slate-600 border-slate-200'
             }`}
           >
-            <Plane className="w-3 h-3 text-emerald-400" />
+            <Plane className="w-3 h-3 text-blue-700" />
             Flight Path
           </button>
         </div>
@@ -209,7 +209,7 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
       {/* Main Map + Side Panel Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {/* Map Container (3 Cols) */}
-        <div className="lg:col-span-3 h-[580px] rounded-xl overflow-hidden border border-slate-800 relative z-0">
+        <div className="lg:col-span-3 h-[580px] rounded-xl overflow-hidden border border-slate-300 relative z-0 shadow-sm">
           <MapContainer
             center={[26.7509, 94.2270]}
             zoom={16}
@@ -218,7 +218,7 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
           >
             <MapController center={[26.7509, 94.2270]} />
 
-            {/* Satellite / Dark Base Layer */}
+            {/* Base Layer */}
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -228,8 +228,8 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
             {activeLayers.sections &&
               TEA_SECTIONS.map((sec) => {
                 const isSelected = selectedSection.id === sec.id;
-                const strokeColor = sec.status === 'critical' ? '#f43f5e' : sec.status === 'warning' ? '#eab308' : '#10b981';
-                const fillColor = sec.status === 'critical' ? '#e11d48' : sec.status === 'warning' ? '#ca8a04' : '#059669';
+                const strokeColor = sec.status === 'critical' ? '#e11d48' : sec.status === 'warning' ? '#d97706' : '#059669';
+                const fillColor = sec.status === 'critical' ? '#f43f5e' : sec.status === 'warning' ? '#f59e0b' : '#10b981';
 
                 return (
                   <Polygon
@@ -246,18 +246,18 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
                     }}
                   >
                     <Popup>
-                      <div className="p-1 space-y-1 text-slate-100">
-                        <h4 className="font-bold text-sm text-white">{sec.name}</h4>
-                        <p className="text-xs text-slate-300">
+                      <div className="p-1 space-y-1 text-slate-800">
+                        <h4 className="font-bold text-sm text-slate-900">{sec.name}</h4>
+                        <p className="text-xs text-slate-600">
                           Acreage: <strong>{sec.areaHa} Ha</strong> ({sec.bushes.toLocaleString()} bushes)
                         </p>
                         <p className="text-xs">
                           Status:{' '}
-                          <span className={sec.status === 'critical' ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold'}>
+                          <span className={sec.status === 'critical' ? 'text-rose-700 font-bold' : 'text-emerald-700 font-bold'}>
                             {sec.status.toUpperCase()} ({sec.infestationRate}% Infestation)
                           </span>
                         </p>
-                        <p className="text-xs text-slate-400 italic">
+                        <p className="text-xs text-slate-500 italic">
                           Dominant Pest: {sec.dominantPest}
                         </p>
                       </div>
@@ -275,24 +275,24 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
                     icon={createHotspotIcon(hs.severity)}
                   >
                     <Popup>
-                      <div className="p-1.5 space-y-2 text-slate-100 max-w-[220px]">
-                        <div className="flex items-center justify-between border-b border-slate-700 pb-1">
-                          <span className="font-mono text-xs font-bold text-emerald-400">{hs.id}</span>
+                      <div className="p-1.5 space-y-2 text-slate-800 max-w-[220px]">
+                        <div className="flex items-center justify-between border-b border-slate-200 pb-1">
+                          <span className="font-mono text-xs font-bold text-blue-700">{hs.id}</span>
                           <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                            hs.severity === 'Critical' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-300'
+                            hs.severity === 'Critical' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'
                           }`}>
                             {hs.severity}
                           </span>
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-white italic">{hs.pestName}</p>
-                          <p className="text-[11px] text-slate-300">Confidence: <strong>{hs.confidence}%</strong></p>
-                          <p className="text-[11px] text-slate-300">Affected Bushes: <strong>{hs.bushCount}</strong></p>
-                          <p className="text-[11px] text-slate-300">Prescribed Spot-Spray: <strong>{hs.spotSprayVolumeL} L</strong></p>
+                          <p className="text-xs font-bold text-slate-900 italic">{hs.pestName}</p>
+                          <p className="text-[11px] text-slate-600">Confidence: <strong>{hs.confidence}%</strong></p>
+                          <p className="text-[11px] text-slate-600">Affected Bushes: <strong>{hs.bushCount}</strong></p>
+                          <p className="text-[11px] text-slate-600">Prescribed Spot-Spray: <strong>{hs.spotSprayVolumeL} L</strong></p>
                         </div>
                         <button
                           onClick={() => setActiveTab('spray-planner')}
-                          className="w-full text-center py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-semibold"
+                          className="w-full text-center py-1 bg-blue-700 hover:bg-blue-800 text-white rounded text-[11px] font-semibold"
                         >
                           Arm Solenoid Nozzle
                         </button>
@@ -306,7 +306,7 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
                       center={[hs.lat, hs.lng]}
                       radius={hs.affectedRadiusMeters}
                       pathOptions={{
-                        color: hs.severity === 'Critical' ? '#f43f5e' : '#f59e0b',
+                        color: hs.severity === 'Critical' ? '#e11d48' : '#d97706',
                         weight: 1,
                         fillColor: hs.severity === 'Critical' ? '#f43f5e' : '#f59e0b',
                         fillOpacity: 0.25,
@@ -322,10 +322,10 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
               <Polyline
                 positions={flightWaypoints}
                 pathOptions={{
-                  color: '#34d399',
+                  color: '#0284c7',
                   weight: 2,
                   dashArray: '5, 8',
-                  opacity: 0.8
+                  opacity: 0.9
                 }}
               />
             )}
@@ -333,8 +333,8 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
             {/* Simulated Live Drone Marker */}
             <Marker position={currentDronePos} icon={droneIcon}>
               <Popup>
-                <div className="p-1 text-slate-100 text-xs">
-                  <strong className="text-emerald-400">HexaSpray VRA-16 (Live)</strong>
+                <div className="p-1 text-slate-800 text-xs">
+                  <strong className="text-blue-700">HexaSpray VRA-16 (Live)</strong>
                   <p>Altitude: 18m AGL</p>
                   <p>Speed: 6.8 m/s</p>
                   <p>Status: {isSimulating ? 'Active Spot Spraying' : 'Hover / Standby'}</p>
@@ -343,9 +343,9 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
             </Marker>
           </MapContainer>
 
-          {/* Map Floating Telemetry HUD */}
-          <div className="absolute bottom-4 left-4 z-10 bg-slate-950/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 text-xs text-slate-200 shadow-xl space-y-1.5 min-w-[200px]">
-            <div className="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-1">
+          {/* Map Floating Telemetry HUD - Navy Corporate */}
+          <div className="absolute bottom-4 left-4 z-10 bg-navy-900/95 backdrop-blur-md border border-navy-700 rounded-xl p-3 text-xs text-white shadow-xl space-y-1.5 min-w-[200px]">
+            <div className="flex items-center justify-between text-slate-300 border-b border-navy-700 pb-1">
               <span className="font-semibold text-[11px] uppercase tracking-wider">Drone Telemetry</span>
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
             </div>
@@ -363,62 +363,62 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
             </div>
             <div className="flex justify-between">
               <span className="text-slate-400">PWM Solenoid:</span>
-              <span className="font-mono text-amber-400 font-bold">
+              <span className="font-mono text-amber-300 font-bold">
                 {isSimulating && [2, 3, 6, 7].includes(droneStep) ? 'PULSING (Active)' : 'STANDBY (0 L/m)'}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Selected Section Details & Hotspot List (1 Col) */}
+        {/* Selected Section Details & Hotspot List (1 Col) - White Corporate */}
         <div className="space-y-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 className="text-sm font-bold text-white">{selectedSection.name}</h3>
+          <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3 shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <h3 className="text-sm font-bold text-slate-900">{selectedSection.name}</h3>
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
                 selectedSection.status === 'critical'
-                  ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
-                  : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                  ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                  : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
               }`}>
                 {selectedSection.status.toUpperCase()}
               </span>
             </div>
 
             <div className="space-y-2 text-xs">
-              <div className="flex justify-between py-1 border-b border-slate-800/60">
-                <span className="text-slate-400">Block Area:</span>
-                <span className="font-mono text-slate-200 font-semibold">{selectedSection.areaHa} Hectares</span>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Block Area:</span>
+                <span className="font-mono text-slate-900 font-bold">{selectedSection.areaHa} Hectares</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800/60">
-                <span className="text-slate-400">Plantation Clone:</span>
-                <span className="text-slate-200 font-medium">TV-1 Heritage Clone</span>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Plantation Clone:</span>
+                <span className="text-slate-800 font-medium">TV-1 Heritage Clone</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800/60">
-                <span className="text-slate-400">Infestation Rate:</span>
-                <span className="font-bold text-rose-400">{selectedSection.infestationRate}%</span>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Infestation Rate:</span>
+                <span className="font-bold text-rose-700">{selectedSection.infestationRate}%</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800/60">
-                <span className="text-slate-400">Detected Hotspots:</span>
-                <span className="font-bold text-amber-400">{selectedSection.hotspotsCount} micro-clusters</span>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Detected Hotspots:</span>
+                <span className="font-bold text-amber-700">{selectedSection.hotspotsCount} micro-clusters</span>
               </div>
               <div className="flex justify-between py-1">
-                <span className="text-slate-400">Target Pest:</span>
-                <span className="italic text-slate-200">Helopeltis theivora</span>
+                <span className="text-slate-500">Target Pest:</span>
+                <span className="italic text-slate-800 font-medium">Helopeltis theivora</span>
               </div>
             </div>
 
             <button
               onClick={() => setActiveTab('spray-planner')}
-              className="w-full mt-2 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/20 transition-all"
+              className="w-full mt-2 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
             >
-              <Droplet className="w-4 h-4 text-emerald-200" />
+              <Droplet className="w-4 h-4 text-blue-200" />
               <span>Load VRA Prescription</span>
             </button>
           </div>
 
           {/* Hotspot Priority List */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          <div className="bg-white border border-slate-200 rounded-xl p-4 space-y-3 shadow-sm">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
               Hotspot Geotags ({DETECTED_HOTSPOTS.length})
             </h4>
 
@@ -426,16 +426,16 @@ export default function GISMap({ selectedEstate, setActiveTab }) {
               {DETECTED_HOTSPOTS.map((hs) => (
                 <div
                   key={hs.id}
-                  className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-xs hover:border-slate-700 transition-all"
+                  className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs hover:border-blue-300 transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono font-bold text-emerald-400">{hs.id}</span>
-                    <span className="text-[10px] text-slate-400">{hs.timestamp}</span>
+                    <span className="font-mono font-bold text-blue-700">{hs.id}</span>
+                    <span className="text-[10px] text-slate-500">{hs.timestamp}</span>
                   </div>
-                  <p className="text-white font-medium italic mt-1">{hs.pestName}</p>
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                  <p className="text-slate-900 font-bold italic mt-1">{hs.pestName}</p>
+                  <div className="flex items-center justify-between text-[11px] text-slate-500 mt-1">
                     <span>{hs.bushCount} bushes</span>
-                    <span className="font-mono text-amber-400 font-semibold">{hs.spotSprayVolumeL} L</span>
+                    <span className="font-mono text-amber-700 font-bold">{hs.spotSprayVolumeL} L</span>
                   </div>
                 </div>
               ))}

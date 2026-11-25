@@ -342,18 +342,18 @@ export default function ProposalViewer() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <FileText className="w-4 h-4 text-amber-400" />
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <FileText className="w-5 h-5 text-amber-600" />
               NESFIC-I-07 Official Grant Proposal Submissions
             </h2>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">
               All 12 Sections Ready (&lt;500 Words Each)
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-600 mt-1">
             Calibrated for the Government of Assam Startup Portal • Ready for direct copy-paste into submission form
           </p>
         </div>
@@ -362,7 +362,7 @@ export default function ProposalViewer() {
           <a
             href="/NESFIC-I-07_Proposal_Document.pdf"
             download="NESFIC-I-07_Proposal_Document.pdf"
-            className="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition-all"
+            className="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Download Proposal PDF</span>
@@ -371,7 +371,7 @@ export default function ProposalViewer() {
           <a
             href="/NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
             download="NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
-            className="px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/20 transition-all"
+            className="px-3.5 py-2 rounded-lg bg-navy-800 hover:bg-navy-900 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Download Proof of Work PDF</span>
@@ -379,7 +379,7 @@ export default function ProposalViewer() {
 
           <button
             onClick={copyAll}
-            className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all"
+            className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all"
           >
             {copiedId === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copiedId === 'all' ? 'All Copied to Clipboard!' : 'Copy Entire Proposal'}</span>
@@ -388,52 +388,52 @@ export default function ProposalViewer() {
       </div>
 
       {/* Supporting Material Card */}
-      <div className="bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900 border border-amber-500/30 rounded-xl p-5 space-y-3">
-        <h3 className="text-sm font-bold text-amber-300 flex items-center gap-2">
-          <Sparkles className="w-4 h-4" />
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 shadow-sm">
+        <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-amber-600" />
           Supporting Material Form Fields (Section 03)
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800">
-            <span className="text-slate-400 block font-medium">Upload Proof of Work / Evidence (PDF):</span>
+          <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
+            <span className="text-slate-500 block font-medium">Upload Proof of Work / Evidence (PDF):</span>
             <div className="flex items-center justify-between mt-1">
-              <strong className="text-white font-mono text-[11px] truncate">NESFIC-I-07_AeroPest_Proof_Of_Work.pdf</strong>
+              <strong className="text-slate-900 font-mono text-[11px] truncate">NESFIC-I-07_AeroPest_Proof_Of_Work.pdf</strong>
               <a
                 href="/NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
                 download="NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
-                className="text-indigo-400 hover:text-indigo-300 font-bold ml-2 underline text-[10px]"
+                className="text-navy-700 hover:text-navy-900 font-bold ml-2 underline text-[10px]"
               >
                 Download
               </a>
             </div>
-            <span className="text-[10px] text-emerald-400 mt-1 block">Includes GIS wireframes, YOLO metrics, WSP tests</span>
+            <span className="text-[10px] text-emerald-700 font-medium mt-1 block">Includes GIS wireframes, YOLO metrics, WSP tests</span>
           </div>
 
-          <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800">
-            <span className="text-slate-400 block font-medium">Demo / Product Video URL:</span>
+          <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
+            <span className="text-slate-500 block font-medium">Demo / Product Video URL:</span>
             <a
               href="https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection"
               target="_blank"
               rel="noreferrer"
-              className="text-amber-400 hover:underline font-mono mt-1 block truncate"
+              className="text-navy-700 hover:underline font-mono font-medium mt-1 block truncate"
             >
               https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection
             </a>
-            <span className="text-[10px] text-slate-400 mt-1 block">Simulation & Video walk-through</span>
+            <span className="text-[10px] text-slate-500 mt-1 block">Simulation & Video walk-through</span>
           </div>
 
-          <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800">
-            <span className="text-slate-400 block font-medium">Product / Website URL:</span>
+          <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
+            <span className="text-slate-500 block font-medium">Product / Website URL:</span>
             <a
               href="https://nesfic-i-07-drone-pest-detection.pages.dev"
               target="_blank"
               rel="noreferrer"
-              className="text-emerald-400 hover:underline font-mono mt-1 block truncate"
+              className="text-emerald-700 hover:underline font-mono font-medium mt-1 block truncate"
             >
               https://nesfic-i-07-drone-pest-detection.pages.dev
             </a>
-            <span className="text-[10px] text-emerald-400 mt-1 block">Live Cloudflare Pages deployment</span>
+            <span className="text-[10px] text-emerald-600 font-medium mt-1 block">Live Cloudflare Pages deployment</span>
           </div>
         </div>
       </div>
@@ -447,8 +447,8 @@ export default function ProposalViewer() {
               key={sec.id}
               className={`rounded-xl border transition-all ${
                 isExpanded
-                  ? 'bg-slate-900/90 border-amber-500/40 shadow-lg'
-                  : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                  ? 'bg-white border-navy-400 shadow-md ring-1 ring-navy-400/20'
+                  : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
               }`}
             >
               {/* Header */}
@@ -457,14 +457,14 @@ export default function ProposalViewer() {
                 className="p-4 flex items-center justify-between cursor-pointer select-none"
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono font-bold flex items-center justify-center text-xs">
+                  <span className="w-7 h-7 rounded-lg bg-navy-50 border border-navy-200 text-navy-800 font-mono font-bold flex items-center justify-center text-xs">
                     {sec.id}
                   </span>
-                  <h3 className="text-sm font-bold text-white">{sec.title}</h3>
+                  <h3 className="text-sm font-bold text-slate-900">{sec.title}</h3>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                  <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
                     {sec.wordCount} / {sec.limit} words
                   </span>
                   
@@ -473,40 +473,40 @@ export default function ProposalViewer() {
                       e.stopPropagation();
                       copySection(sec.id, sec.content);
                     }}
-                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 transition-colors"
                     title="Copy section"
                   >
                     {copiedId === sec.id ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
                     ) : (
                       <Copy className="w-3.5 h-3.5" />
                     )}
                   </button>
 
                   {isExpanded ? (
-                    <ChevronUp className="w-4 h-4 text-slate-400" />
+                    <ChevronUp className="w-4 h-4 text-slate-500" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-slate-400" />
+                    <ChevronDown className="w-4 h-4 text-slate-500" />
                   )}
                 </div>
               </div>
 
               {/* Content body */}
               {isExpanded && (
-                <div className="px-5 pb-5 pt-2 border-t border-slate-800/80">
-                  <div className="bg-slate-950/80 rounded-xl p-4 border border-slate-800/80 font-sans text-xs text-slate-200 whitespace-pre-line leading-relaxed selection:bg-amber-500/30">
+                <div className="px-5 pb-5 pt-2 border-t border-slate-100">
+                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 font-sans text-xs text-slate-800 whitespace-pre-line leading-relaxed selection:bg-amber-100">
                     {sec.content}
                   </div>
 
-                  <div className="flex items-center justify-between mt-3 text-xs text-slate-400">
+                  <div className="flex items-center justify-between mt-3 text-xs text-slate-500">
                     <span>Target submission field: {sec.title.split('.')[1]}</span>
                     <button
                       onClick={() => copySection(sec.id, sec.content)}
-                      className="text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1"
+                      className="text-navy-700 hover:text-navy-900 font-bold flex items-center gap-1"
                     >
                       {copiedId === sec.id ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
                           <span>Copied!</span>
                         </>
                       ) : (
