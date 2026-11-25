@@ -95,7 +95,7 @@ export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
           </h1>
 
           <p className="text-slate-200 text-sm md:text-base leading-relaxed">
-            <strong>AeroPest-Tea</strong> by <strong>TeaTech Labs</strong> (Lead Applicant: <em>Rangan Bhuyan</em>) transforms tea crop protection from reactive calendar-based blanket spraying to autonomous sub-meter aerial scouting and surgical spot-spraying.
+            <strong>AeroPest-Tea</strong> by <strong>TeaTech Labs</strong> (Lead Applicant: <em>Pratibha Das Hatibaruah</em>) transforms tea crop protection from reactive calendar-based blanket spraying to autonomous sub-meter aerial scouting and surgical spot-spraying.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-3">
@@ -269,7 +269,7 @@ export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
               </div>
               <div className="text-xl font-extrabold text-navy-950 font-mono">₹20.0 Lakhs</div>
               <p className="text-[11px] text-slate-600 leading-relaxed">
-                Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
+                Lead Precision Agritech Architect (Pratibha Das Hatibaruah), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
               </p>
             </div>
 

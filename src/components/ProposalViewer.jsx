@@ -214,7 +214,7 @@ The prototype will be ready for controlled laboratory and hardware-in-the-loop v
     wordCount: 334,
     limit: 500,
     content: `Core Team Composition & Roles:
-1. Lead Applicant & Precision Agriculture Architect — Rangan Bhuyan (TeaTech Labs): 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.
+1. Lead Applicant & Precision Agriculture Architect — Pratibha Das Hatibaruah (TeaTech Labs): 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.
 2. Senior Computer Vision / AI Engineer (1 Full-Time): Specialized in PyTorch, YOLO architectures, TensorRT optimization, and aerial photogrammetry (OpenSfM). Responsible for model training, segmentation, and edge deployment.
 3. UAV Avionics & Embedded Hardware Engineer (1 Full-Time): Expert in PX4/ArduPilot flight stacks, MAVLink, RTK-GNSS, PWM solenoid valve integration, and DGCA drone certification standards.
 4. Full-Stack GIS & Cloud Developer (1 Full-Time): Proficient in React, Leaflet/MapLibre, FastAPI, PostGIS, and offline-first mobile architecture. Builds the operator dashboard and prescription pipeline.
@@ -222,7 +222,7 @@ The prototype will be ready for controlled laboratory and hardware-in-the-loop v
 6. Licensed DGCA Remote Pilot (1 Contract/Phase): Certified drone operator for field survey and spraying trials across Assam test sites.
 
 Manpower Allocation by Phase:
-- Discovery & Data Capture (M1–M3): 4 FTE (Lead: Rangan Bhuyan, CV Engineer, Drone Pilot, Agronomist).
+- Discovery & Data Capture (M1–M3): 4 FTE (Lead: Pratibha Das Hatibaruah, CV Engineer, Drone Pilot, Agronomist).
 - Model Training & Hardware Integration (M4–M5): 4 FTE (Lead, CV Engineer, Avionics Engineer, Full-Stack Dev).
 - Field Testing & Validation (M6–M7): 5 FTE (All technical staff + Drone Pilot & Agronomist).
 - Pilot Deployment (M8–M9): 3 FTE (Lead, Full-Stack Dev, Field Operations).
@@ -308,7 +308,7 @@ Intellectual Property & Dependencies:
     limit: 500,
     content: `Indicative Resource & Budget Allocation (₹40.0 Lakhs Problem Statement Grant):
 1. Technical Engineering Team & R&D (₹20.0 Lakhs | 50.0%):
-- Lead Precision Agritech Architect (Rangan Bhuyan): Project governance, system architecture, TRA Tocklai alignment.
+- Lead Precision Agritech Architect (Pratibha Das Hatibaruah): Project governance, system architecture, TRA Tocklai alignment.
 - Senior Computer Vision / AI Engineer: YOLOv11x training, canopy segmentation, TensorRT edge model quantization.
 - UAV Avionics & Embedded Hardware Engineer: PX4 autopilot firmware, RTK-GNSS centimeter positioning, high-speed PWM solenoid valve integration.
 - Full-Stack GIS & Cloud/Offline Mobile Developer: Offline GCS interface, interactive vector map layers, and automated prescription pipeline.
@@ -456,7 +456,7 @@ export default function ProposalViewer() {
             </div>
             <div className="text-xl font-extrabold text-navy-950 mt-1">₹20.0 Lakhs</div>
             <p className="text-[11px] text-slate-600 mt-1.5 leading-relaxed">
-              Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
+              Lead Architect (Pratibha Das Hatibaruah), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
             </p>
           </div>
 
@@ -534,12 +534,12 @@ export default function ProposalViewer() {
           <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
             <span className="text-slate-500 block font-medium">Product / Website URL:</span>
             <a
-              href="https://nesfic-i-07-drone-pest-detection.pages.dev"
+              href="https://nesfic26-tea-pest-ai-drone.pages.dev"
               target="_blank"
               rel="noreferrer"
               className="text-emerald-700 hover:underline font-mono font-medium mt-1 block truncate"
             >
-              https://nesfic-i-07-drone-pest-detection.pages.dev
+              https://nesfic26-tea-pest-ai-drone.pages.dev
             </a>
             <span className="text-[10px] text-emerald-600 font-medium mt-1 block">Live Cloudflare Pages deployment</span>
           </div>

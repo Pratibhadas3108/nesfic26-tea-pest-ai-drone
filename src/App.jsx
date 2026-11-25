@@ -81,7 +81,7 @@ export default function App() {
               </div>
               <div className="flex flex-wrap items-center gap-3 text-slate-600 text-[11px]">
                 <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 px-2.5 py-0.5 rounded border border-blue-200 font-bold">
-                  Lead Applicant: Rangan Bhuyan
+                  Lead Applicant: Pratibha Das Hatibaruah
                 </span>
                 <span className="text-slate-400">•</span>
                 <span>
@@ -102,7 +102,7 @@ export default function App() {
               </button>
 
               <a
-                href="https://nesfic-i-07-drone-pest-detection.pages.dev"
+                href="https://nesfic26-tea-pest-ai-drone.pages.dev"
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-semibold text-xs transition-colors flex items-center gap-1"
@@ -136,7 +136,7 @@ export default function App() {
                 &copy; 2026 <strong>TeaTech Labs</strong>. All rights reserved.
               </p>
               <p className="flex items-center gap-1 text-slate-600">
-                Lead Applicant: <strong className="text-blue-700 font-semibold">Rangan Bhuyan</strong> (TeaTech Labs) • Jorhat, Assam, India
+                Lead Applicant: <strong className="text-blue-700 font-semibold">Pratibha Das Hatibaruah</strong> (TeaTech Labs) • Jorhat, Assam, India
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@
 *A Flagship Solution for North East Seva First Innovation Challenge (NESFIC) 2026 — Government Track*  
 *Developed in collaboration with the Tea Research Association (TRA) Tocklai (New Technology Committee)*
 
-[![Cloudflare Pages](https://img.shields.io/badge/Live%20Demo-Cloudflare%20Pages-orange.svg)](https://nesfic-i-07-drone-pest-detection.pages.dev)
+[![Cloudflare Pages](https://img.shields.io/badge/Live%20Demo-Cloudflare%20Pages-orange.svg)](https://nesfic26-tea-pest-ai-drone.pages.dev)
 [![Assam Startup](https://img.shields.io/badge/NESFIC-2026-emerald.svg)](https://startup.assam.gov.in)
 [![DGCA Drone Rules](https://img.shields.io/badge/DGCA-Green%20Zone%20Compliant-blue.svg)](https://digitalsky.dgca.gov.in)
 [![TRA PPC](https://img.shields.io/badge/TRA%20Tocklai-PPC%20Validated-teal.svg)](https://www.tocklai.org)
@@ -12,7 +12,7 @@
 ---
 
 ## 🌐 Live Application
-- **Cloudflare Pages Production URL:** [https://nesfic-i-07-drone-pest-detection.pages.dev](https://nesfic-i-07-drone-pest-detection.pages.dev)
+- **Cloudflare Pages Production URL:** [https://nesfic26-tea-pest-ai-drone.pages.dev](https://nesfic26-tea-pest-ai-drone.pages.dev)
 
 ---
 
@@ -76,7 +76,7 @@ The project operates under the **NESFIC-I-07 Problem Statement Grant (₹40.0 La
 
 | Budget Category & Resource Head | Allocation (₹ Lakhs) | % Share | Operational Scope & Deliverables |
 | :--- | :--- | :--- | :--- |
-| **1. Technical Engineering Team & R&D** | **₹20.0 Lakhs** | **50.0%** | Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Developer. |
+| **1. Technical Engineering Team & R&D** | **₹20.0 Lakhs** | **50.0%** | Lead Precision Agritech Architect (Pratibha Das Hatibaruah), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Developer. |
 | **2. Hardware Assets & Avionics** | **₹12.0 Lakhs** | **30.0%** | Multispectral scout UAV (₹3.5L), 16L spray hexacopter with 4 PWM nozzles (₹5.5L), NVIDIA Jetson Orin GCS & RTK base station (₹3.0L). |
 | **3. Field Pilot Trials & TRA Testing** | **₹4.5 Lakhs** | **11.25%** | TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & third-party GC-MS/MS laboratory residue testing. |
 | **4. Operational Logistics & Regulatory** | **₹3.5 Lakhs** | **8.75%** | High-capacity smart LiPo battery packs, field charging generator, multi-estate transit across Upper Assam, DGCA insurance & statutory filings. |

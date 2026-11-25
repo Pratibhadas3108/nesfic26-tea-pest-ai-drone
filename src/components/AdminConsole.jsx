@@ -37,7 +37,7 @@ export default function AdminConsole() {
   };
 
   const users = [
-    { name: "Rangan Bhuyan", role: "Super Admin (Lead Architect)", entity: "TeaTech Labs", access: "Full Root / Avionics / ML", status: "Active" },
+    { name: "Pratibha Das Hatibaruah", role: "Super Admin (Lead Architect)", entity: "TeaTech Labs", access: "Full Root / Avionics / ML", status: "Active" },
     { name: "Dr. B. C. Borah", role: "Entomological Auditor", entity: "TRA Tocklai", access: "Audit / MRL Verification", status: "Active" },
     { name: "Manash Jyoti Saikia", role: "Garden Superintendent", entity: "Jorhat Tea Division", access: "Mission Dispatch / VRA Review", status: "Active" },
     { name: "Kabir Hazarika", role: "Licensed Remote Pilot", entity: "TeaTech Flight Ops", access: "DGCA UIN Flight / Telemetry", status: "Active" },
@@ -393,7 +393,7 @@ export default function AdminConsole() {
                   <td className="py-3.5 px-3 font-mono font-bold text-navy-950">₹20,00,000</td>
                   <td className="py-3.5 px-3 font-bold text-navy-800">50.0%</td>
                   <td className="py-3.5 px-3 text-slate-600">
-                    Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision Engineer (YOLOv11x / TensorRT), UAV Avionics Firmware Engineer (PX4 / PWM), Full-Stack GIS Developer.
+                    Lead Precision Agritech Architect (Pratibha Das Hatibaruah), Senior Computer Vision Engineer (YOLOv11x / TensorRT), UAV Avionics Firmware Engineer (PX4 / PWM), Full-Stack GIS Developer.
                   </td>
                   <td className="py-3.5 px-3 text-right">
                     <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Allocated</span>

@@ -33,7 +33,7 @@ export default function Overview({ setActiveTab, selectedEstate }) {
                 <span>TRA Tocklai Agro-Innovation Protocol • NESFIC-I-07</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-slate-200 text-xs font-medium border border-white/10">
-                <span>Lead Applicant: <strong className="text-white">Rangan Bhuyan</strong></span>
+                <span>Lead Applicant: <strong className="text-white">Pratibha Das Hatibaruah</strong></span>
                 <span className="text-slate-400">•</span>
                 <span className="text-blue-300">TeaTech Labs</span>
               </div>

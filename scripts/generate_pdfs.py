@@ -42,7 +42,7 @@ class NumberedCanvas(canvas.Canvas):
         
         # Header (pages > 1)
         if self._pageNumber > 1:
-            self.drawString(54, 11 * inch - 36, "NESFIC-I-07: AeroPest-Tea | TeaTech Labs (Lead Applicant: Rangan Bhuyan)")
+            self.drawString(54, 11 * inch - 36, "NESFIC-I-07: AeroPest-Tea | TeaTech Labs (Lead Applicant: Pratibha Das Hatibaruah)")
             self.drawRightString(8.5 * inch - 54, 11 * inch - 36, "Government Track • TRA Tocklai")
             self.setStrokeColor(colors.HexColor("#cbd5e1"))
             self.setLineWidth(0.5)
@@ -188,11 +188,11 @@ def build_proposal_pdf(output_path):
             Paragraph("Partner Stakeholder:", meta_table_label),
             Paragraph("Tea Research Association (TRA) Tocklai", meta_table_val),
             Paragraph("Lead Applicant:", meta_table_label),
-            Paragraph("<b>Rangan Bhuyan</b> (Lead Systems Architect)", meta_table_val),
+            Paragraph("<b>Pratibha Das Hatibaruah</b> (Lead Systems Architect)", meta_table_val),
         ],
         [
             Paragraph("Live Deployment URL:", meta_table_label),
-            Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", meta_table_val),
+            Paragraph("<font color='#059669'>https://nesfic26-tea-pest-ai-drone.pages.dev</font>", meta_table_val),
             Paragraph("GitHub Repository:", meta_table_label),
             Paragraph("Pratibhadas3108/nesfic26-tea-pest-ai-drone", meta_table_val),
         ],
@@ -236,7 +236,7 @@ Today, tea estates rely on manual scouting where field workers physically inspec
 <b>Intended Outcomes:</b> Deploy an autonomous drone-based AI detection and targeted spot-spraying system that reduces overall agrochemical consumption by <b>60%–75%</b>, lowers operating costs by <b>45%</b>, maintains zero-exceedance MRL compliance, and identifies pest infestations 5 to 7 days earlier than conventional scouting.""", None),
 
         ("2. Proposed Solution & Key Features", "358 / 500 words", """<b>Solution Overview:</b><br/>
-We propose <b>'AeroPest-Tea'</b>, an autonomous, closed-loop precision viticulture and crop protection system engineered specifically for tea agro-ecosystems by TeaTech Labs under Lead Applicant Rangan Bhuyan. The solution pairs high-resolution aerial multispectral/RGB scouting drones with edge AI detection, translating canopy infection hotspots into automated, centimeter-accurate Variable-Rate Application (VRA) spot-spraying missions.<br/><br/>
+We propose <b>'AeroPest-Tea'</b>, an autonomous, closed-loop precision viticulture and crop protection system engineered specifically for tea agro-ecosystems by TeaTech Labs under Lead Applicant Pratibha Das Hatibaruah. The solution pairs high-resolution aerial multispectral/RGB scouting drones with edge AI detection, translating canopy infection hotspots into automated, centimeter-accurate Variable-Rate Application (VRA) spot-spraying missions.<br/><br/>
 <b>Main Modules & Functions:</b><br/>
 1. <i>Autonomous Aerial Survey Module:</i> Lightweight scouting drones fly pre-programmed autonomous terrain-following grid paths at 15–20 m AGL, capturing geotagged, sub-centimeter RGB and multispectral imagery.<br/>
 2. <i>Edge & Cloud Computer Vision Diagnostic Engine:</i> A fine-tuned YOLOv11 and semantic segmentation pipeline trained on tea pest leaf and canopy symptoms. It classifies pest species, quantifies infestation severity (Stage 1 initial feeding punctures to Stage 3 necrosis), and tags geographic coordinates.<br/>
@@ -325,14 +325,14 @@ Automated radiometric calibration and white-balance normalization across fluctua
 Initial baseline datasets will leverage existing open agronomic repositories and self-collected pilot flights conducted under DGCA Green Zone provisions. Formal data sharing agreements will be executed with TRA Tocklai for proprietary pest life cycle models and historical infestation records; the platform does not assume unconfirmed access to internal government servers.""", None),
 
         ("8. Team, Manpower & Expertise", "334 / 500 words", """<b>Core Team Composition & Roles:</b><br/>
-1. <b>Lead Applicant & Precision Agriculture Architect — Rangan Bhuyan (TeaTech Labs):</b> 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.<br/>
+1. <b>Lead Applicant & Precision Agriculture Architect — Pratibha Das Hatibaruah (TeaTech Labs):</b> 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.<br/>
 2. <b>Senior Computer Vision / AI Engineer (1 Full-Time):</b> Specialized in PyTorch, YOLO architectures, TensorRT optimization, and aerial photogrammetry (OpenSfM). Responsible for model training, segmentation, and edge deployment.<br/>
 3. <b>UAV Avionics & Embedded Hardware Engineer (1 Full-Time):</b> Expert in PX4/ArduPilot flight stacks, MAVLink, RTK-GNSS, PWM solenoid valve integration, and DGCA drone certification standards.<br/>
 4. <b>Full-Stack GIS & Cloud Developer (1 Full-Time):</b> Proficient in React, Leaflet/MapLibre, FastAPI, PostGIS, and offline-first mobile architecture. Builds the operator dashboard and prescription pipeline.<br/>
 5. <b>Agricultural Entomologist / Field Agronomist (1 Part-Time / Advisor):</b> Background in tea plantation pest management and TRA Plant Protection Code (PPC). Guides ground-truth annotation and spray efficacy metrics.<br/>
 6. <b>Licensed DGCA Remote Pilot (1 Contract/Phase):</b> Certified drone operator for field survey and spraying trials across Assam test sites.<br/><br/>
 <b>Manpower Allocation by Phase:</b><br/>
-• Discovery & Data Capture (M1–M3): 4 FTE (Lead: Rangan Bhuyan, CV Engineer, Drone Pilot, Agronomist).<br/>
+• Discovery & Data Capture (M1–M3): 4 FTE (Lead: Pratibha Das Hatibaruah, CV Engineer, Drone Pilot, Agronomist).<br/>
 • Model Training & Hardware Integration (M4–M5): 4 FTE (Lead, CV Engineer, Avionics Engineer, Full-Stack Dev).<br/>
 • Field Testing & Validation (M6–M7): 5 FTE (All technical staff + Drone Pilot & Agronomist).<br/>
 • Pilot Deployment (M8–M9): 3 FTE (Lead, Full-Stack Dev, Field Operations).<br/><br/>
@@ -376,7 +376,7 @@ The system operates on a supervisory semi-autonomous paradigm: while detection a
 Proprietary IP: Algorithmic pipeline for automated translation of tea pest orthomosaics into dynamic PWM solenoid waypoint commands; proprietary tea pest synthetic augmentation dataset. Open Source Dependencies: PyTorch, OpenCV, GDAL, React, Leaflet, ArduPilot/PX4 firmware (open MAVLink protocol).""", None),
 
         ("12. Resources, Risks & Pilot Validation", "337 / 500 words", """<b>Indicative Resource & Budget Allocation (₹40.0 Lakhs Problem Statement Grant):</b><br/>
-• <i>1. Technical Engineering Team & R&D (₹20.0 Lakhs | 50.0%):</i> Covers core engineering team across all phases: Lead Agritech Architect Rangan Bhuyan (governance, TRA alignment), Senior Computer Vision Engineer (YOLOv11x training, TensorRT edge optimization), UAV Avionics & Embedded Hardware Engineer (PX4 firmware, RTK-GNSS, PWM solenoid valves), and Full-Stack GIS Developer (offline GCS dashboard, automated prescription pipeline).<br/>
+• <i>1. Technical Engineering Team & R&D (₹20.0 Lakhs | 50.0%):</i> Covers core engineering team across all phases: Lead Agritech Architect Pratibha Das Hatibaruah (governance, TRA alignment), Senior Computer Vision Engineer (YOLOv11x training, TensorRT edge optimization), UAV Avionics & Embedded Hardware Engineer (PX4 firmware, RTK-GNSS, PWM solenoid valves), and Full-Stack GIS Developer (offline GCS dashboard, automated prescription pipeline).<br/>
 • <i>2. Hardware Assets & Avionics Equipment (₹12.0 Lakhs | 30.0%):</i> RTK-equipped multispectral scout UAV with 5-band sensor (₹3.5L), 16L agricultural spray hexacopter with dual RTK, obstacle LiDAR and 4 PWM solenoid nozzles (₹5.5L), NVIDIA Jetson Orin GCS edge unit, RTK base station, and field calibration kit (₹3.0L).<br/>
 • <i>3. Field Pilot Validation, Testing & TRA Certification (₹4.5 Lakhs | 11.25%):</i> Controlled trials at TRA Tocklai Experimental Station (10 Ha) and commercial tea estates (100 Ha), water-sensitive paper (WSP) droplet coverage analysis, and GC-MS/MS laboratory residue testing for MRL export compliance.<br/>
 • <i>4. Operational Logistics, Consumables & Regulatory (₹3.5 Lakhs | 8.75%):</i> High-cycle smart LiPo battery packs, portable field generator, multi-estate transit across Upper Assam, and DGCA flight insurance & authorizations.<br/>
@@ -407,7 +407,7 @@ Proprietary IP: Algorithmic pipeline for automated translation of tea pest ortho
             b_head = ParagraphStyle('BHead', parent=meta_table_label, textColor=colors.white)
             budget_data = [
                 [Paragraph("Budget Category & Resource Head", b_head), Paragraph("Allocation", b_head), Paragraph("% Share", b_head), Paragraph("Operational Scope & Deliverables", b_head)],
-                [Paragraph("<b>1. Technical Engineering Team & R&D</b>", meta_table_label), Paragraph("<b>₹20.0 Lakhs</b>", meta_table_label), Paragraph("50.0%", meta_table_val), Paragraph("Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", meta_table_val)],
+                [Paragraph("<b>1. Technical Engineering Team & R&D</b>", meta_table_label), Paragraph("<b>₹20.0 Lakhs</b>", meta_table_label), Paragraph("50.0%", meta_table_val), Paragraph("Lead Architect (Pratibha Das Hatibaruah), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", meta_table_val)],
                 [Paragraph("<b>2. Hardware Assets & Avionics</b>", meta_table_label), Paragraph("<b>₹12.0 Lakhs</b>", meta_table_label), Paragraph("30.0%", meta_table_val), Paragraph("Multispectral scout UAV (₹3.5L), 16L spray hexacopter with PWM nozzles (₹5.5L), Jetson Orin GCS & RTK base (₹3.0L).", meta_table_val)],
                 [Paragraph("<b>3. Field Pilot Trials & TRA Testing</b>", meta_table_label), Paragraph("<b>₹4.5 Lakhs</b>", meta_table_label), Paragraph("11.25%", meta_table_val), Paragraph("TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & GC-MS/MS MRL testing.", meta_table_val)],
                 [Paragraph("<b>4. Operational Logistics & Regulatory</b>", meta_table_label), Paragraph("<b>₹3.5 Lakhs</b>", meta_table_label), Paragraph("8.75%", meta_table_val), Paragraph("High-cycle smart LiPo battery packs, field generator, transit across Upper Assam, DGCA authorizations.", meta_table_val)],
@@ -429,7 +429,7 @@ Proprietary IP: Algorithmic pipeline for automated translation of tea pest ortho
 
     # Legal Disclaimer Card
     disclaimer_text = """<b>Regulatory & Operational Disclaimer:</b> AeroPest-Tea is an advanced agronomic decision-support and precision drone automation prototype engineered for the <b>North East Seva First Innovation Challenge (NESFIC) 2026</b> under the Department of Innovation, Incubation and Startups (DIIS), Government of Assam, in technical alignment with the <b>Tea Research Association (TRA) Tocklai</b> Plant Protection Code (PPC). All aerial pesticide spot-spraying flight missions must strictly comply with the Directorate General of Civil Aviation (DGCA) Drone Rules 2021, DigitalSky Green Zone provisions, and Central Insecticides Board & Registration Committee (CIB&RC) aerial application buffer protocols before commercial deployment in active tea gardens.<br/><br/>
-<b>© 2026 TeaTech Labs. All rights reserved. | Lead Applicant: Rangan Bhuyan (Jorhat, Assam, India)</b>"""
+<b>© 2026 TeaTech Labs. All rights reserved. | Lead Applicant: Pratibha Das Hatibaruah (Jorhat, Assam, India)</b>"""
     
     story.append(Spacer(1, 8))
     d_table = Table([[Paragraph(disclaimer_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.4 * inch])
@@ -541,14 +541,14 @@ def build_pow_pdf(output_path):
     meta_data = [
         [
             Paragraph("Challenge ID:", cell_bold), Paragraph("NESFIC-I-07 (Government Track)", cell_norm),
-            Paragraph("Lead Applicant:", cell_bold), Paragraph("<b>Rangan Bhuyan</b> (Lead Systems Architect)", cell_norm)
+            Paragraph("Lead Applicant:", cell_bold), Paragraph("<b>Pratibha Das Hatibaruah</b> (Lead Systems Architect)", cell_norm)
         ],
         [
             Paragraph("Submitting Entity:", cell_bold), Paragraph("<b>TeaTech Labs</b> (Assam, India)", cell_norm),
             Paragraph("Stakeholder Entity:", cell_bold), Paragraph("Tea Research Association (TRA) Tocklai", cell_norm)
         ],
         [
-            Paragraph("Live Platform URL:", cell_bold), Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", cell_norm),
+            Paragraph("Live Platform URL:", cell_bold), Paragraph("<font color='#059669'>https://nesfic26-tea-pest-ai-drone.pages.dev</font>", cell_norm),
             Paragraph("GitHub Source Code:", cell_bold), Paragraph("Pratibhadas3108/nesfic26-tea-pest-ai-drone", cell_norm)
         ]
     ]
@@ -676,9 +676,9 @@ def build_pow_pdf(output_path):
 
     story.append(Spacer(1, 6))
     story.append(Paragraph("6. Lead Applicant & Team Endorsement", section_heading))
-    story.append(Paragraph("""<b>Lead Applicant: Rangan Bhuyan</b> (Founder & Precision Agriculture Systems Architect, TeaTech Labs)<br/>
-Rangan Bhuyan brings over 8 years of specialized engineering experience in autonomous drone systems, embedded edge computing, and precision viticulture/crop protection. Supported by senior computer vision researchers, avionics hardware engineers, licensed DGCA remote pilots, and entomological advisors aligned with the Tea Research Association (TRA) Tocklai.<br/><br/>
-<b>Verified Live Application URL:</b> <a href="https://nesfic-i-07-drone-pest-detection.pages.dev">https://nesfic-i-07-drone-pest-detection.pages.dev</a><br/>
+    story.append(Paragraph("""<b>Lead Applicant: Pratibha Das Hatibaruah</b> (Founder & Precision Agriculture Systems Architect, TeaTech Labs)<br/>
+Pratibha Das Hatibaruah brings over 8 years of specialized engineering experience in autonomous drone systems, embedded edge computing, and precision viticulture/crop protection. Supported by senior computer vision researchers, avionics hardware engineers, licensed DGCA remote pilots, and entomological advisors aligned with the Tea Research Association (TRA) Tocklai.<br/><br/>
+<b>Verified Live Application URL:</b> <a href="https://nesfic26-tea-pest-ai-drone.pages.dev">https://nesfic26-tea-pest-ai-drone.pages.dev</a><br/>
 <b>Source Code Repository:</b> <a href="https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone">https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone</a>""", body_style))
 
     # 7. Indicative Resource & Budget Allocation
@@ -689,7 +689,7 @@ Rangan Bhuyan brings over 8 years of specialized engineering experience in auton
     b_head_pow = ParagraphStyle('BHeadPow', parent=cell_bold, textColor=colors.white)
     pow_budget = [
         [Paragraph("Budget Category & Resource Head", b_head_pow), Paragraph("Allocation", b_head_pow), Paragraph("% Share", b_head_pow), Paragraph("Key Resource Deliverables", b_head_pow)],
-        [Paragraph("<b>1. Technical Engineering Team & R&D</b>", cell_bold), Paragraph("<b>₹20.0 Lakhs</b>", cell_bold), Paragraph("50.0%", cell_norm), Paragraph("Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", cell_norm)],
+        [Paragraph("<b>1. Technical Engineering Team & R&D</b>", cell_bold), Paragraph("<b>₹20.0 Lakhs</b>", cell_bold), Paragraph("50.0%", cell_norm), Paragraph("Lead Architect (Pratibha Das Hatibaruah), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", cell_norm)],
         [Paragraph("<b>2. Hardware Assets & Avionics</b>", cell_bold), Paragraph("<b>₹12.0 Lakhs</b>", cell_bold), Paragraph("30.0%", cell_norm), Paragraph("Multispectral scout UAV (₹3.5L), 16L spray hexacopter with PWM nozzles (₹5.5L), Jetson Orin GCS & RTK base (₹3.0L).", cell_norm)],
         [Paragraph("<b>3. Field Pilot Trials & TRA Testing</b>", cell_bold), Paragraph("<b>₹4.5 Lakhs</b>", cell_bold), Paragraph("11.25%", cell_norm), Paragraph("TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & GC-MS/MS MRL testing.", cell_norm)],
         [Paragraph("<b>4. Operational Logistics & Regulatory</b>", cell_bold), Paragraph("<b>₹3.5 Lakhs</b>", cell_bold), Paragraph("8.75%", cell_norm), Paragraph("High-cycle smart LiPo battery packs, field generator, transit across Upper Assam, DGCA authorizations.", cell_norm)],
@@ -714,7 +714,7 @@ Rangan Bhuyan brings over 8 years of specialized engineering experience in auton
         story.append(Spacer(1, 8))
 
     # Footer Box
-    disc_text = """<b>Statement of Authenticity:</b> This Proof of Work and Technical Evidence document is submitted as formal supporting material for NESFIC-I-07 under the North East Seva First Innovation Challenge 2026. All algorithms, benchmark figures, and system wireframes represent functional prototypes developed by TeaTech Labs under Lead Applicant Rangan Bhuyan.<br/>
+    disc_text = """<b>Statement of Authenticity:</b> This Proof of Work and Technical Evidence document is submitted as formal supporting material for NESFIC-I-07 under the North East Seva First Innovation Challenge 2026. All algorithms, benchmark figures, and system wireframes represent functional prototypes developed by TeaTech Labs under Lead Applicant Pratibha Das Hatibaruah.<br/>
 <b>© 2026 TeaTech Labs. All rights reserved. | Jorhat, Assam, India</b>"""
     d_table = Table([[Paragraph(disc_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.4 * inch])
     d_table.setStyle(TableStyle([

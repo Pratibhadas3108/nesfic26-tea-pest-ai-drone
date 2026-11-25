@@ -44,7 +44,7 @@ export default function Navbar({
                   </span>
                 </div>
                 <p className="text-[10px] text-slate-400 leading-none">
-                  NESFIC-I-07 • Lead: <strong className="text-slate-300">Rangan Bhuyan</strong>
+                  NESFIC-I-07 • Lead: <strong className="text-slate-300">Pratibha Das Hatibaruah</strong>
                 </p>
               </div>
             </button>
