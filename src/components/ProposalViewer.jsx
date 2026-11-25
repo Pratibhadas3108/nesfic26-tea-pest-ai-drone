@@ -209,10 +209,10 @@ The prototype will be ready for controlled laboratory and hardware-in-the-loop v
   {
     id: 8,
     title: "8. Team, manpower & expertise",
-    wordCount: 326,
+    wordCount: 334,
     limit: 500,
     content: `Core Team Composition & Roles:
-1. Project Lead & Agritech Architect (1 Full-Time): 8+ years experience in precision agriculture, drone systems, and large-scale agritech project management. Oversees system integration and stakeholder alignment.
+1. Lead Applicant & Precision Agriculture Architect — Rangan Bhuyan (TeaTech Labs): 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.
 2. Senior Computer Vision / AI Engineer (1 Full-Time): Specialized in PyTorch, YOLO architectures, TensorRT optimization, and aerial photogrammetry (OpenSfM). Responsible for model training, segmentation, and edge deployment.
 3. UAV Avionics & Embedded Hardware Engineer (1 Full-Time): Expert in PX4/ArduPilot flight stacks, MAVLink, RTK-GNSS, PWM solenoid valve integration, and DGCA drone certification standards.
 4. Full-Stack GIS & Cloud Developer (1 Full-Time): Proficient in React, Leaflet/MapLibre, FastAPI, PostGIS, and offline-first mobile architecture. Builds the operator dashboard and prescription pipeline.
@@ -220,7 +220,7 @@ The prototype will be ready for controlled laboratory and hardware-in-the-loop v
 6. Licensed DGCA Remote Pilot (1 Contract/Phase): Certified drone operator for field survey and spraying trials across Assam test sites.
 
 Manpower Allocation by Phase:
-- Discovery & Data Capture (M1–M3): 4 FTE (Lead, CV Engineer, Drone Pilot, Agronomist).
+- Discovery & Data Capture (M1–M3): 4 FTE (Lead: Rangan Bhuyan, CV Engineer, Drone Pilot, Agronomist).
 - Model Training & Hardware Integration (M4–M5): 4 FTE (Lead, CV Engineer, Avionics Engineer, Full-Stack Dev).
 - Field Testing & Validation (M6–M7): 5 FTE (All technical staff + Drone Pilot & Agronomist).
 - Pilot Deployment (M8–M9): 3 FTE (Lead, Full-Stack Dev, Field Operations).
@@ -358,13 +358,33 @@ export default function ProposalViewer() {
           </p>
         </div>
 
-        <button
-          onClick={copyAll}
-          className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all"
-        >
-          {copiedId === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-          <span>{copiedId === 'all' ? 'All Copied to Clipboard!' : 'Copy Entire Proposal'}</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href="/NESFIC-I-07_Proposal_Document.pdf"
+            download="NESFIC-I-07_Proposal_Document.pdf"
+            className="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition-all"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Proposal PDF</span>
+          </a>
+
+          <a
+            href="/NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
+            download="NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
+            className="px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/20 transition-all"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Proof of Work PDF</span>
+          </a>
+
+          <button
+            onClick={copyAll}
+            className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all"
+          >
+            {copiedId === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+            <span>{copiedId === 'all' ? 'All Copied to Clipboard!' : 'Copy Entire Proposal'}</span>
+          </button>
+        </div>
       </div>
 
       {/* Supporting Material Card */}
@@ -377,7 +397,16 @@ export default function ProposalViewer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           <div className="bg-slate-950/70 p-3 rounded-lg border border-slate-800">
             <span className="text-slate-400 block font-medium">Upload Proof of Work / Evidence (PDF):</span>
-            <strong className="text-white font-mono mt-1 block">NESFIC-I-07_AeroPest_Proof_Of_Work.pdf</strong>
+            <div className="flex items-center justify-between mt-1">
+              <strong className="text-white font-mono text-[11px] truncate">NESFIC-I-07_AeroPest_Proof_Of_Work.pdf</strong>
+              <a
+                href="/NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
+                download="NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf"
+                className="text-indigo-400 hover:text-indigo-300 font-bold ml-2 underline text-[10px]"
+              >
+                Download
+              </a>
+            </div>
             <span className="text-[10px] text-emerald-400 mt-1 block">Includes GIS wireframes, YOLO metrics, WSP tests</span>
           </div>
 

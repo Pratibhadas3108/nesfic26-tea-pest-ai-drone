@@ -66,13 +66,15 @@ export default function Navbar({ activeTab, setActiveTab, selectedEstate, setSel
                 <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1">
                   AeroPest<span className="text-emerald-400">Tea</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-wider font-bold bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">
-                  v1.2 AI-Edge
+                <span className="text-[10px] uppercase tracking-wider font-bold bg-slate-800 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30">
+                  TeaTech Labs
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-emerald-500" />
                 {selectedEstate.name}
+                <span className="text-slate-600">|</span>
+                <span className="text-slate-300">Lead: <strong>Rangan Bhuyan</strong></span>
               </p>
             </div>
           </div>

@@ -2,11 +2,101 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍃</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AeroPest-Tea | NESFIC-I-07 Drone Pest Detection & Spot-Spraying</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#10b981" />
+    <meta name="theme-color" content="#022c22" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>AeroPest-Tea | AI Drone Pest Detection & Spot-Spraying | TeaTech Labs</title>
+    <meta name="title" content="AeroPest-Tea | AI Drone Pest Detection & Spot-Spraying | TeaTech Labs" />
+    <meta name="description" content="AeroPest-Tea by TeaTech Labs (Lead Applicant: Rangan Bhuyan) is an autonomous, AI-driven drone crop protection and targeted spot-spraying platform for Assam tea plantations, engineered for NESFIC-I-07 in collaboration with TRA Tocklai." />
+    <meta name="keywords" content="AeroPest-Tea, TeaTech Labs, Rangan Bhuyan, NESFIC-I-07, Assam Startup 2026, TRA Tocklai, Drone Pest Detection, Precision Agriculture Assam, Helopeltis theivora, Red Spider Mite, Variable-Rate Spot-Spraying, Tea Plantation AI, MRL Compliance EU FSSAI, DGCA Agri Drone" />
+    <meta name="author" content="Rangan Bhuyan, TeaTech Labs" />
+    <meta name="publisher" content="TeaTech Labs" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nesfic-i-07-drone-pest-detection.pages.dev/" />
+
+    <!-- Geographic & Regional Meta Tags (GEO-Friendly) -->
+    <meta name="geo.region" content="IN-AS" />
+    <meta name="geo.placename" content="Jorhat, Assam, India" />
+    <meta name="geo.position" content="26.7509;94.2237" />
+    <meta name="ICBM" content="26.7509, 94.2237" />
+    <meta name="country" content="India" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nesfic-i-07-drone-pest-detection.pages.dev/" />
+    <meta property="og:title" content="AeroPest-Tea | AI Drone Pest Detection & Spot-Spraying" />
+    <meta property="og:description" content="Autonomous AI-driven drone crop protection and targeted spot-spraying platform for Assam tea plantations by TeaTech Labs. NESFIC-I-07 Government Track." />
+    <meta property="og:image" content="https://nesfic-i-07-drone-pest-detection.pages.dev/favicon.svg" />
+    <meta property="og:site_name" content="AeroPest-Tea | TeaTech Labs" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nesfic-i-07-drone-pest-detection.pages.dev/" />
+    <meta name="twitter:title" content="AeroPest-Tea | AI Drone Pest Detection & Spot-Spraying" />
+    <meta name="twitter:description" content="AI-driven drone spot-spraying reducing agrochemical usage by 68% in Assam tea plantations. Lead Applicant: Rangan Bhuyan, TeaTech Labs." />
+    <meta name="twitter:image" content="https://nesfic-i-07-drone-pest-detection.pages.dev/favicon.svg" />
+
+    <!-- JSON-LD Structured Data Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "AeroPest-Tea",
+          "operatingSystem": "Web, Embedded Edge Linux (NVIDIA Jetson)",
+          "applicationCategory": "AgricultureApplication, AIApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "description": "AI-Driven Drone-Based Pest Detection & Targeted Spot-Spraying Platform for Tea Plantations",
+          "url": "https://nesfic-i-07-drone-pest-detection.pages.dev",
+          "author": {
+            "@type": "Person",
+            "name": "Rangan Bhuyan",
+            "jobTitle": "Lead Applicant & Precision Agriculture Architect",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "TeaTech Labs"
+            }
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "TeaTech Labs",
+          "url": "https://nesfic-i-07-drone-pest-detection.pages.dev",
+          "founder": {
+            "@type": "Person",
+            "name": "Rangan Bhuyan"
+          },
+          "location": {
+            "@type": "Place",
+            "name": "Jorhat, Assam, India",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 26.7509,
+              "longitude": 94.2237
+            }
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">

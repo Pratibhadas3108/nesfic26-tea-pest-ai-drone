@@ -29,9 +29,16 @@ export default function Overview({ setActiveTab, selectedEstate }) {
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>TRA Tocklai Agro-Innovation Protocol • NESFIC-I-07</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>TRA Tocklai Agro-Innovation Protocol • NESFIC-I-07</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/90 border border-slate-700 text-slate-200 text-xs font-medium">
+                <span>Lead Applicant: <strong className="text-white">Rangan Bhuyan</strong></span>
+                <span className="text-slate-500">•</span>
+                <span className="text-emerald-400">TeaTech Labs</span>
+              </div>
             </div>
             
             <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
