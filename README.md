@@ -70,5 +70,19 @@ Visit `http://localhost:5173` in your browser.
 
 ---
 
+## 💰 Indicative Resource & Budget Allocation (₹40.0 Lakhs Grant)
+
+The project operates under the **NESFIC-I-07 Problem Statement Grant (₹40.0 Lakhs)** with **50% directly allocated to the Technical Engineering Team**:
+
+| Budget Category & Resource Head | Allocation (₹ Lakhs) | % Share | Operational Scope & Deliverables |
+| :--- | :--- | :--- | :--- |
+| **1. Technical Engineering Team & R&D** | **₹20.0 Lakhs** | **50.0%** | Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Developer. |
+| **2. Hardware Assets & Avionics** | **₹12.0 Lakhs** | **30.0%** | Multispectral scout UAV (₹3.5L), 16L spray hexacopter with 4 PWM nozzles (₹5.5L), NVIDIA Jetson Orin GCS & RTK base station (₹3.0L). |
+| **3. Field Pilot Trials & TRA Testing** | **₹4.5 Lakhs** | **11.25%** | TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & third-party GC-MS/MS laboratory residue testing. |
+| **4. Operational Logistics & Regulatory** | **₹3.5 Lakhs** | **8.75%** | High-capacity smart LiPo battery packs, field charging generator, multi-estate transit across Upper Assam, DGCA insurance & statutory filings. |
+| **Total Problem Statement Grant** | **₹40.0 Lakhs** | **100.0%** | **Full allocation under NESFIC 2026 Problem Statement Grant** |
+
+---
+
 ## 📄 Proposal Sections (NESFIC 2026 Portal)
 All 12 official proposal sections (<500 words each) covering Problem Understanding, Solution Architecture, User Journey, Methodology, Milestones, Data Requirements, Team, Testing, Compliance, Innovation, and Risk Mitigation are viewable directly in the web app under the **NESFIC-I-07 Proposal** tab.

@@ -9,7 +9,9 @@ import {
   Sparkles, 
   CheckCircle2, 
   ChevronDown, 
-  ChevronUp 
+  ChevronUp,
+  IndianRupee,
+  PieChart
 } from 'lucide-react';
 
 export const PROPOSAL_SECTIONS = [
@@ -302,23 +304,40 @@ Intellectual Property & Dependencies:
   {
     id: 12,
     title: "12. Resources, risks & pilot validation",
-    wordCount: 356,
+    wordCount: 337,
     limit: 500,
-    content: `Development & Validation Resource & Cost Drivers:
-- Hardware Assets: RTK-equipped multispectral scout UAV (₹4.5L), 16L agricultural spray UAV with PWM solenoids (₹7.5L), NVIDIA Jetson GCS edge station (₹1.5L), RTK base station (₹2.0L). Total hardware: ~₹15.5 Lakhs.
-- R&D & Manpower: AI/software engineering, embedded development, flight trials, and entomology consultancy: ~₹14.0 Lakhs.
-- Operational & Travel: Field transport across Upper Assam estates, consumables, battery banks, and field calibration supplies: ~₹2.5 Lakhs.
-- Total Estimated Grant Budget: Aligns within the ₹20L–₹35L grant bracket under NESFIC 2026.
+    content: `Indicative Resource & Budget Allocation (₹40.0 Lakhs Problem Statement Grant):
+1. Technical Engineering Team & R&D (₹20.0 Lakhs | 50.0%):
+- Lead Precision Agritech Architect (Rangan Bhuyan): Project governance, system architecture, TRA Tocklai alignment.
+- Senior Computer Vision / AI Engineer: YOLOv11x training, canopy segmentation, TensorRT edge model quantization.
+- UAV Avionics & Embedded Hardware Engineer: PX4 autopilot firmware, RTK-GNSS centimeter positioning, high-speed PWM solenoid valve integration.
+- Full-Stack GIS & Cloud/Offline Mobile Developer: Offline GCS interface, interactive vector map layers, and automated prescription pipeline.
+
+2. Hardware Assets & Avionics Equipment (₹12.0 Lakhs | 30.0%):
+- RTK-equipped multispectral scouting UAV with 5-band sensor (NIR, RedEdge, RGB): ₹3.5 Lakhs.
+- 16L agricultural hexacopter with dual RTK, obstacle LiDAR, and 4 PWM solenoid nozzles: ₹5.5 Lakhs.
+- NVIDIA Jetson Orin GCS edge computing unit, RTK D-GNSS base station, and ground calibration kit: ₹3.0 Lakhs.
+
+3. Field Pilot Validation, Testing & TRA Certification (₹4.5 Lakhs | 11.25%):
+- Controlled field trials at TRA Tocklai Experimental Station (10 Ha) and commercial tea estates (100 Ha).
+- Water-sensitive paper (WSP) droplet canopy penetration analysis and spray drift audit.
+- Independent accredited laboratory testing for MRL gas chromatography (GC-MS/MS) chemical residue validation.
+
+4. Operational Logistics, Consumables & Regulatory (₹3.5 Lakhs | 8.75%):
+- High-capacity smart LiPo battery packs and portable field charging generator.
+- Multi-estate field transit across Upper Assam (Jorhat, Golaghat, Dibrugarh).
+- DGCA flight insurance, statutory flight authorizations, and audit reporting.
+Total Allocated Grant: ₹40.0 Lakhs (100.0%).
 
 Key Risks & Mitigations:
-1. Adverse Weather (Monsoon Rains & High Winds): Assam pest peaks coincide with monsoon flushes. Mitigation: IP54/IP65 weather-sealed airframes; rain-radar integrated scheduling; early morning flight windows.
-2. Dense Canopy Occlusion: Pests living underneath lower foliage. Mitigation: Angled oblique gimbal capture during scouting; downward rotor downwash tuned to gently disturb upper tea leaves during spot spraying.
-3. Tea Garden Connectivity Deficits: Weak 4G cellular coverage in remote gardens. Mitigation: 100% offline edge processing on GCS; local Wi-Fi sync between drones and ground station.
+1. Monsoon Weather & Winds: IP54/IP65 weather-sealed airframes, integrated Doppler radar scheduling, and dawn flight windows.
+2. Dense Canopy Occlusion: Oblique gimbal scouting angles and rotor downwash leaf disturbance during spot spraying.
+3. Garden Connectivity Deficits: 100% offline edge processing on GCS; local ad-hoc Wi-Fi telemetry sync.
 
-Pilot Validation Roadmap in Assam Context:
-- Site 1 (Controlled Trial): 10-hectare plot at the Tea Research Association (TRA) Tocklai Experimental Station in Jorhat to calibrate detection accuracy against entomologist counts.
-- Site 2 (Commercial Estate Pilot): 100-hectare commercial tea garden in Golaghat/Dibrugarh over two full plucking flushes.
-- Validation Metrics: Compare chemical volume, plucking yield loss, MRL test reports (gas chromatography), and total cost per hectare against an adjacent control section managed with conventional spraying.`
+Pilot Validation Roadmap in Assam:
+- Site 1 (Controlled Trial): 10-Ha plot at TRA Tocklai Experimental Station in Jorhat to calibrate detection accuracy against entomologist counts.
+- Site 2 (Commercial Estate Pilot): 100-Ha commercial tea estate in Golaghat/Dibrugarh across two plucking flushes.
+- Validation Metrics: Compare active pesticide reduction (>65%), foliar damage prevention, MRL export compliance, and cost per hectare against an adjacent control section managed with conventional spraying.`
   }
 ];
 
@@ -384,6 +403,95 @@ export default function ProposalViewer() {
             {copiedId === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copiedId === 'all' ? 'All Copied to Clipboard!' : 'Copy Entire Proposal'}</span>
           </button>
+        </div>
+      </div>
+
+      {/* Indicative Resource & Budget Allocation Card */}
+      <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-4 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-navy-50 text-navy-800 border border-navy-200 flex items-center justify-center font-bold">
+              <IndianRupee className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                Indicative Resource & Budget Allocation
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+                  Problem Statement Grant: ₹40.0 Lakhs
+                </span>
+              </h3>
+              <p className="text-xs text-slate-500">
+                Resource distribution across technical engineering team, precision UAV hardware, field trials, and operations
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Total Grant Bracket</span>
+            <div className="text-lg font-extrabold text-navy-950 font-mono">₹40,00,000</div>
+          </div>
+        </div>
+
+        {/* Proportional visual bar */}
+        <div className="space-y-1.5">
+          <div className="w-full bg-slate-100 rounded-full h-3 flex overflow-hidden p-0.5 border border-slate-200">
+            <div className="bg-navy-800 h-full rounded-l-full" style={{ width: '50%' }} title="Technical Engineering Team (50%)" />
+            <div className="bg-sky-600 h-full" style={{ width: '30%' }} title="Hardware Assets & Avionics (30%)" />
+            <div className="bg-emerald-600 h-full" style={{ width: '11.25%' }} title="Field Pilot Validation (11.25%)" />
+            <div className="bg-amber-500 h-full rounded-r-full" style={{ width: '8.75%' }} title="Logistics & Regulatory (8.75%)" />
+          </div>
+          <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-medium px-1">
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-navy-800 inline-block"></span> Tech Team (50%)</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-sky-600 inline-block"></span> Hardware Assets (30%)</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-emerald-600 inline-block"></span> Field Trials & TRA (11.25%)</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-amber-500 inline-block"></span> Logistics & DGCA (8.75%)</span>
+          </div>
+        </div>
+
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="p-3.5 rounded-lg border border-navy-200 bg-navy-50/50">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-navy-900">1. Technical Engineering Team</span>
+              <span className="font-mono font-bold text-navy-800 bg-white border border-navy-200 px-1.5 py-0.5 rounded text-[10px]">50%</span>
+            </div>
+            <div className="text-xl font-extrabold text-navy-950 mt-1">₹20.0 Lakhs</div>
+            <p className="text-[11px] text-slate-600 mt-1.5 leading-relaxed">
+              Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-lg border border-sky-200 bg-sky-50/50">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-sky-900">2. Hardware & Avionics</span>
+              <span className="font-mono font-bold text-sky-800 bg-white border border-sky-200 px-1.5 py-0.5 rounded text-[10px]">30%</span>
+            </div>
+            <div className="text-xl font-extrabold text-sky-950 mt-1">₹12.0 Lakhs</div>
+            <p className="text-[11px] text-slate-600 mt-1.5 leading-relaxed">
+              RTK multispectral scout UAV (₹3.5L), 16L agricultural spray UAV with PWM solenoids (₹5.5L), Jetson Orin GCS & RTK base (₹3.0L).
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-lg border border-emerald-200 bg-emerald-50/50">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-emerald-900">3. Field Pilot & TRA Trials</span>
+              <span className="font-mono font-bold text-emerald-800 bg-white border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">11.25%</span>
+            </div>
+            <div className="text-xl font-extrabold text-emerald-950 mt-1">₹4.5 Lakhs</div>
+            <p className="text-[11px] text-slate-600 mt-1.5 leading-relaxed">
+              TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & GC-MS/MS laboratory MRL verification.
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-lg border border-amber-200 bg-amber-50/50">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-amber-900">4. Logistics & Regulatory</span>
+              <span className="font-mono font-bold text-amber-800 bg-white border border-amber-200 px-1.5 py-0.5 rounded text-[10px]">8.75%</span>
+            </div>
+            <div className="text-xl font-extrabold text-amber-950 mt-1">₹3.5 Lakhs</div>
+            <p className="text-[11px] text-slate-600 mt-1.5 leading-relaxed">
+              Smart LiPo battery banks, field generator, transit across Upper Assam, DGCA flight authorizations & statutory audit reports.
+            </p>
+          </div>
         </div>
       </div>
 

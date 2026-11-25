@@ -15,7 +15,8 @@ import {
   RefreshCw,
   Sliders,
   Award,
-  Database
+  Database,
+  IndianRupee
 } from 'lucide-react';
 import { DRONE_FLEET, TEA_SECTIONS } from '../data/mockData';
 
@@ -116,6 +117,18 @@ export default function AdminConsole() {
         >
           <Cpu className="w-4 h-4" />
           Edge AI Model Registry
+        </button>
+
+        <button
+          onClick={() => setActiveAdminTab('budget')}
+          className={`py-3 px-4 text-xs font-bold border-b-2 flex items-center gap-2 transition-all ${
+            activeAdminTab === 'budget'
+              ? 'border-blue-700 text-blue-800'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <IndianRupee className="w-4 h-4" />
+          Grant Budget (₹40L)
         </button>
       </div>
 
@@ -317,6 +330,130 @@ export default function AdminConsole() {
                 <strong>28.4 ms (35.2 FPS)</strong>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 5: Grant Budget Allocation */}
+      {activeAdminTab === 'budget' && (
+        <div className="bg-white rounded-b-xl border border-t-0 border-slate-200 p-6 space-y-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                NESFIC-I-07 Problem Statement Grant Allocation
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+                  Grant Size: ₹40.0 Lakhs
+                </span>
+              </h3>
+              <p className="text-xs text-slate-500">
+                Audited financial blueprint and resource allocation under Government Track (TRA Tocklai partnership)
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-500">Total Approved:</span>
+              <span className="font-mono font-extrabold text-base text-navy-950">₹40,00,000</span>
+            </div>
+          </div>
+
+          {/* Allocation Progress Bar */}
+          <div className="space-y-1.5">
+            <div className="w-full bg-slate-100 rounded-full h-3.5 flex overflow-hidden p-0.5 border border-slate-200">
+              <div className="bg-navy-800 h-full rounded-l-full" style={{ width: '50%' }} title="Technical Engineering Team (50%)" />
+              <div className="bg-sky-600 h-full" style={{ width: '30%' }} title="Hardware Assets & Avionics (30%)" />
+              <div className="bg-emerald-600 h-full" style={{ width: '11.25%' }} title="Field Pilot Validation (11.25%)" />
+              <div className="bg-amber-500 h-full rounded-r-full" style={{ width: '8.75%' }} title="Logistics & Regulatory (8.75%)" />
+            </div>
+            <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-medium px-1">
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-navy-800 inline-block"></span> 1. Technical Team (₹20.0L | 50%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-sky-600 inline-block"></span> 2. Hardware Assets (₹12.0L | 30%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-emerald-600 inline-block"></span> 3. Field Trials & TRA (₹4.5L | 11.25%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-amber-500 inline-block"></span> 4. Logistics & DGCA (₹3.5L | 8.75%)</span>
+            </div>
+          </div>
+
+          {/* Financial Breakdown Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-slate-50 text-slate-700 uppercase font-bold text-[11px] border-b border-slate-200">
+                <tr>
+                  <th className="py-3 px-3">Budget Category</th>
+                  <th className="py-3 px-3">Allocation</th>
+                  <th className="py-3 px-3">% Share</th>
+                  <th className="py-3 px-3">Manpower & Resource Deliverables</th>
+                  <th className="py-3 px-3 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="py-3.5 px-3 font-semibold text-slate-900">
+                    1. Technical Engineering Team & R&D
+                    <span className="block text-[11px] text-slate-500 font-normal">Core development & algorithmic staff</span>
+                  </td>
+                  <td className="py-3.5 px-3 font-mono font-bold text-navy-950">₹20,00,000</td>
+                  <td className="py-3.5 px-3 font-bold text-navy-800">50.0%</td>
+                  <td className="py-3.5 px-3 text-slate-600">
+                    Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision Engineer (YOLOv11x / TensorRT), UAV Avionics Firmware Engineer (PX4 / PWM), Full-Stack GIS Developer.
+                  </td>
+                  <td className="py-3.5 px-3 text-right">
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Allocated</span>
+                  </td>
+                </tr>
+
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="py-3.5 px-3 font-semibold text-slate-900">
+                    2. Hardware Assets & Avionics Equipment
+                    <span className="block text-[11px] text-slate-500 font-normal">Physical airframes and edge computing</span>
+                  </td>
+                  <td className="py-3.5 px-3 font-mono font-bold text-sky-950">₹12,00,000</td>
+                  <td className="py-3.5 px-3 font-bold text-sky-800">30.0%</td>
+                  <td className="py-3.5 px-3 text-slate-600">
+                    Multispectral scout UAV & 5-band sensor (₹3.5L), 16L agricultural spot-spray drone with PWM nozzles (₹5.5L), NVIDIA Jetson Orin GCS & RTK D-GNSS base station (₹3.0L).
+                  </td>
+                  <td className="py-3.5 px-3 text-right">
+                    <span className="text-[10px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">Committed</span>
+                  </td>
+                </tr>
+
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="py-3.5 px-3 font-semibold text-slate-900">
+                    3. Field Pilot Trials, Validation & TRA Certification
+                    <span className="block text-[11px] text-slate-500 font-normal">Experimental grounds and lab assays</span>
+                  </td>
+                  <td className="py-3.5 px-3 font-mono font-bold text-emerald-950">₹4,50,000</td>
+                  <td className="py-3.5 px-3 font-bold text-emerald-800">11.25%</td>
+                  <td className="py-3.5 px-3 text-slate-600">
+                    TRA Tocklai test plots (10 Ha), 100 Ha commercial tea garden trials, WSP canopy droplet penetration assays, and third-party GC-MS/MS laboratory residue testing for MRL export certificates.
+                  </td>
+                  <td className="py-3.5 px-3 text-right">
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Scheduled</span>
+                  </td>
+                </tr>
+
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="py-3.5 px-3 font-semibold text-slate-900">
+                    4. Operational Logistics, Consumables & Regulatory
+                    <span className="block text-[11px] text-slate-500 font-normal">Field transit, power and DGCA compliances</span>
+                  </td>
+                  <td className="py-3.5 px-3 font-mono font-bold text-amber-950">₹3,50,000</td>
+                  <td className="py-3.5 px-3 font-bold text-amber-800">8.75%</td>
+                  <td className="py-3.5 px-3 text-slate-600">
+                    High-capacity smart LiPo flight batteries, mobile charging station, inter-estate transit across Upper Assam (Jorhat, Golaghat, Dibrugarh), DGCA flight insurance and statutory filings.
+                  </td>
+                  <td className="py-3.5 px-3 text-right">
+                    <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Active</span>
+                  </td>
+                </tr>
+
+                <tr className="bg-slate-50 font-bold border-t-2 border-slate-300">
+                  <td className="py-3 px-3 text-slate-900">Total Problem Statement Grant</td>
+                  <td className="py-3 px-3 font-mono text-base text-navy-950">₹40,00,000</td>
+                  <td className="py-3 px-3 text-navy-900">100.0%</td>
+                  <td className="py-3 px-3 text-slate-700">NESFIC 2026 Problem Statement Grant (DIIS / Govt of Assam)</td>
+                  <td className="py-3 px-3 text-right text-emerald-700">Fully Budgeted</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       )}

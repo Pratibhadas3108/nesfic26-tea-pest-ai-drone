@@ -15,7 +15,8 @@ import {
   Globe, 
   Award, 
   ChevronRight,
-  BookOpen
+  BookOpen,
+  IndianRupee
 } from 'lucide-react';
 
 export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
@@ -125,7 +126,7 @@ export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
         </div>
 
         {/* Quick Highlights Bar */}
-        <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-center">
           <div>
             <span className="block text-2xl font-extrabold text-emerald-400">68.4%</span>
             <span className="text-xs text-slate-300">Pesticide Reduction</span>
@@ -141,6 +142,10 @@ export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
           <div>
             <span className="block text-2xl font-extrabold text-white">100% Pass</span>
             <span className="text-xs text-slate-300">EU & FSSAI MRL Safety</span>
+          </div>
+          <div>
+            <span className="block text-2xl font-extrabold text-emerald-300 font-mono">₹40 Lakhs</span>
+            <span className="text-xs text-slate-300">Grant (50% Tech Team)</span>
           </div>
         </div>
       </div>
@@ -225,6 +230,82 @@ export default function LandingPage({ setActiveTab, setIsTutorialOpen }) {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Indicative Resource & Budget Allocation Section */}
+      <div className="space-y-4">
+        <div className="text-center max-w-2xl mx-auto space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            Financial Blueprint • NESFIC-I-07
+          </span>
+          <h2 className="text-2xl font-bold text-slate-900">Indicative Resource & Budget Allocation</h2>
+          <p className="text-xs text-slate-600">
+            Strategic breakdown of the <strong>₹40.0 Lakhs Problem Statement Grant</strong> with <strong>50% (₹20.0 Lakhs) dedicated to the Technical Engineering Team</strong>.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-5">
+          <div className="space-y-1.5">
+            <div className="w-full bg-slate-100 rounded-full h-3.5 flex overflow-hidden p-0.5 border border-slate-200">
+              <div className="bg-navy-800 h-full rounded-l-full" style={{ width: '50%' }} title="Technical Engineering Team (50%)" />
+              <div className="bg-sky-600 h-full" style={{ width: '30%' }} title="Hardware Assets & Avionics (30%)" />
+              <div className="bg-emerald-600 h-full" style={{ width: '11.25%' }} title="Field Pilot Validation (11.25%)" />
+              <div className="bg-amber-500 h-full rounded-r-full" style={{ width: '8.75%' }} title="Logistics & Regulatory (8.75%)" />
+            </div>
+            <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-medium px-1">
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-navy-800 inline-block"></span> 1. Technical Team (₹20.0L | 50%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-sky-600 inline-block"></span> 2. Hardware Assets (₹12.0L | 30%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-emerald-600 inline-block"></span> 3. Field Trials & TRA (₹4.5L | 11.25%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-xs bg-amber-500 inline-block"></span> 4. Logistics & DGCA (₹3.5L | 8.75%)</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div className="p-4 rounded-xl border border-navy-200 bg-navy-50/50 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-navy-900">1. Technical Team & R&D</span>
+                <span className="font-mono font-bold text-navy-800 bg-white border border-navy-200 px-1.5 py-0.5 rounded text-[10px]">50%</span>
+              </div>
+              <div className="text-xl font-extrabold text-navy-950 font-mono">₹20.0 Lakhs</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                Lead Precision Agritech Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer & Full-Stack GIS Developer.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl border border-sky-200 bg-sky-50/50 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sky-900">2. Hardware & Avionics</span>
+                <span className="font-mono font-bold text-sky-800 bg-white border border-sky-200 px-1.5 py-0.5 rounded text-[10px]">30%</span>
+              </div>
+              <div className="text-xl font-extrabold text-sky-950 font-mono">₹12.0 Lakhs</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                Multispectral scout UAV (₹3.5L), 16L agricultural spray drone with 4 PWM nozzles (₹5.5L), NVIDIA Jetson Orin GCS & RTK D-GNSS base (₹3.0L).
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-emerald-900">3. Field Pilot & TRA Trials</span>
+                <span className="font-mono font-bold text-emerald-800 bg-white border border-emerald-200 px-1.5 py-0.5 rounded text-[10px]">11.25%</span>
+              </div>
+              <div className="text-xl font-extrabold text-emerald-950 font-mono">₹4.5 Lakhs</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & third-party GC-MS/MS laboratory residue testing.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl border border-amber-200 bg-amber-50/50 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-amber-900">4. Logistics & Regulatory</span>
+                <span className="font-mono font-bold text-amber-800 bg-white border border-amber-200 px-1.5 py-0.5 rounded text-[10px]">8.75%</span>
+              </div>
+              <div className="text-xl font-extrabold text-amber-950 font-mono">₹3.5 Lakhs</div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                High-capacity smart LiPo battery packs, field charging hub, multi-estate transit across Upper Assam, DGCA insurance & statutory filings.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

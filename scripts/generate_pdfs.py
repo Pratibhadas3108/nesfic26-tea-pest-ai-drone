@@ -375,19 +375,20 @@ The system operates on a supervisory semi-autonomous paradigm: while detection a
 <b>Intellectual Property & Dependencies:</b><br/>
 Proprietary IP: Algorithmic pipeline for automated translation of tea pest orthomosaics into dynamic PWM solenoid waypoint commands; proprietary tea pest synthetic augmentation dataset. Open Source Dependencies: PyTorch, OpenCV, GDAL, React, Leaflet, ArduPilot/PX4 firmware (open MAVLink protocol).""", None),
 
-        ("12. Resources, Risks & Pilot Validation", "356 / 500 words", """<b>Development & Validation Resource & Cost Drivers:</b><br/>
-• Hardware Assets: RTK-equipped multispectral scout UAV (₹4.5L), 16L agricultural spray UAV with PWM solenoids (₹7.5L), NVIDIA Jetson GCS edge station (₹1.5L), RTK base station (₹2.0L). Total hardware: ~₹15.5 Lakhs.<br/>
-• R&D & Manpower: AI/software engineering, embedded development, flight trials, and entomology consultancy: ~₹14.0 Lakhs.<br/>
-• Operational & Travel: Field transport across Upper Assam estates, consumables, battery banks, and field calibration supplies: ~₹2.5 Lakhs.<br/>
-• Total Estimated Grant Budget: Aligns within the ₹20L–₹35L grant bracket under NESFIC 2026.<br/><br/>
+        ("12. Resources, Risks & Pilot Validation", "337 / 500 words", """<b>Indicative Resource & Budget Allocation (₹40.0 Lakhs Problem Statement Grant):</b><br/>
+• <i>1. Technical Engineering Team & R&D (₹20.0 Lakhs | 50.0%):</i> Covers core engineering team across all phases: Lead Agritech Architect Rangan Bhuyan (governance, TRA alignment), Senior Computer Vision Engineer (YOLOv11x training, TensorRT edge optimization), UAV Avionics & Embedded Hardware Engineer (PX4 firmware, RTK-GNSS, PWM solenoid valves), and Full-Stack GIS Developer (offline GCS dashboard, automated prescription pipeline).<br/>
+• <i>2. Hardware Assets & Avionics Equipment (₹12.0 Lakhs | 30.0%):</i> RTK-equipped multispectral scout UAV with 5-band sensor (₹3.5L), 16L agricultural spray hexacopter with dual RTK, obstacle LiDAR and 4 PWM solenoid nozzles (₹5.5L), NVIDIA Jetson Orin GCS edge unit, RTK base station, and field calibration kit (₹3.0L).<br/>
+• <i>3. Field Pilot Validation, Testing & TRA Certification (₹4.5 Lakhs | 11.25%):</i> Controlled trials at TRA Tocklai Experimental Station (10 Ha) and commercial tea estates (100 Ha), water-sensitive paper (WSP) droplet coverage analysis, and GC-MS/MS laboratory residue testing for MRL export compliance.<br/>
+• <i>4. Operational Logistics, Consumables & Regulatory (₹3.5 Lakhs | 8.75%):</i> High-cycle smart LiPo battery packs, portable field generator, multi-estate transit across Upper Assam, and DGCA flight insurance & authorizations.<br/>
+<b>Total Allocated Problem Statement Grant:</b> ₹40.0 Lakhs (100.0%).<br/><br/>
 <b>Key Risks & Mitigations:</b><br/>
-1. <i>Adverse Weather (Monsoon Rains & High Winds):</i> Assam pest peaks coincide with monsoon flushes. Mitigation: IP54/IP65 weather-sealed airframes; rain-radar integrated scheduling; early morning flight windows.<br/>
+1. <i>Adverse Weather (Monsoon Rains & High Winds):</i> Assam pest peaks coincide with monsoon flushes. Mitigation: IP54/IP65 weather-sealed airframes; Doppler weather radar integrated scheduling; early morning flight windows.<br/>
 2. <i>Dense Canopy Occlusion:</i> Pests living underneath lower foliage. Mitigation: Angled oblique gimbal capture during scouting; downward rotor downwash tuned to gently disturb upper tea leaves during spot spraying.<br/>
 3. <i>Tea Garden Connectivity Deficits:</i> Weak 4G cellular coverage in remote gardens. Mitigation: 100% offline edge processing on GCS; local Wi-Fi sync between drones and ground station.<br/><br/>
 <b>Pilot Validation Roadmap in Assam Context:</b><br/>
 • Site 1 (Controlled Trial): 10-hectare plot at the Tea Research Association (TRA) Tocklai Experimental Station in Jorhat to calibrate detection accuracy against entomologist counts.<br/>
 • Site 2 (Commercial Estate Pilot): 100-hectare commercial tea garden in Golaghat/Dibrugarh over two full plucking flushes.<br/>
-• Validation Metrics: Compare chemical volume, plucking yield loss, MRL test reports (gas chromatography), and total cost per hectare against an adjacent control section managed with conventional spraying.""", None)
+• Validation Metrics: Compare active pesticide reduction (>65%), foliar damage prevention, MRL export compliance, and total cost per hectare against an adjacent control section managed with conventional spraying.""", None)
     ]
 
     for title, word_count, content, img_file in sections:
@@ -401,6 +402,27 @@ Proprietary IP: Algorithmic pipeline for automated translation of tea pest ortho
                 sec_elements.append(Spacer(1, 4))
                 sec_elements.append(img_flow)
                 sec_elements.append(Paragraph(f"<b>Visual Evidence:</b> {title.split('.')[1].strip()}", fig_caption))
+
+        if "12. Resources" in title:
+            b_head = ParagraphStyle('BHead', parent=meta_table_label, textColor=colors.white)
+            budget_data = [
+                [Paragraph("Budget Category & Resource Head", b_head), Paragraph("Allocation", b_head), Paragraph("% Share", b_head), Paragraph("Operational Scope & Deliverables", b_head)],
+                [Paragraph("<b>1. Technical Engineering Team & R&D</b>", meta_table_label), Paragraph("<b>₹20.0 Lakhs</b>", meta_table_label), Paragraph("50.0%", meta_table_val), Paragraph("Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", meta_table_val)],
+                [Paragraph("<b>2. Hardware Assets & Avionics</b>", meta_table_label), Paragraph("<b>₹12.0 Lakhs</b>", meta_table_label), Paragraph("30.0%", meta_table_val), Paragraph("Multispectral scout UAV (₹3.5L), 16L spray hexacopter with PWM nozzles (₹5.5L), Jetson Orin GCS & RTK base (₹3.0L).", meta_table_val)],
+                [Paragraph("<b>3. Field Pilot Trials & TRA Testing</b>", meta_table_label), Paragraph("<b>₹4.5 Lakhs</b>", meta_table_label), Paragraph("11.25%", meta_table_val), Paragraph("TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & GC-MS/MS MRL testing.", meta_table_val)],
+                [Paragraph("<b>4. Operational Logistics & Regulatory</b>", meta_table_label), Paragraph("<b>₹3.5 Lakhs</b>", meta_table_label), Paragraph("8.75%", meta_table_val), Paragraph("High-cycle smart LiPo battery packs, field generator, transit across Upper Assam, DGCA authorizations.", meta_table_val)],
+                [Paragraph("<b>Total Problem Statement Grant</b>", meta_table_label), Paragraph("<b>₹40.0 Lakhs</b>", meta_table_label), Paragraph("<b>100.0%</b>", meta_table_label), Paragraph("<b>Allocated under NESFIC-I-07 Government Track Problem Statement</b>", meta_table_label)],
+            ]
+            bt = Table(budget_data, colWidths=[2.2 * inch, 1.1 * inch, 0.8 * inch, 3.3 * inch])
+            bt.setStyle(TableStyle([
+                ('BACKGROUND', (0,0), (-1,0), PRIMARY),
+                ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
+                ('ROWBACKGROUNDS', (0,1), (-1,-2), [colors.white, LIGHT_BG]),
+                ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor("#e2e8f0")),
+                ('PADDING', (0,0), (-1,-1), 3.5),
+            ]))
+            sec_elements.append(Spacer(1, 4))
+            sec_elements.append(bt)
                 
         sec_elements.append(Spacer(1, 6))
         story.append(KeepTogether(sec_elements))
@@ -658,6 +680,30 @@ def build_pow_pdf(output_path):
 Rangan Bhuyan brings over 8 years of specialized engineering experience in autonomous drone systems, embedded edge computing, and precision viticulture/crop protection. Supported by senior computer vision researchers, avionics hardware engineers, licensed DGCA remote pilots, and entomological advisors aligned with the Tea Research Association (TRA) Tocklai.<br/><br/>
 <b>Verified Live Application URL:</b> <a href="https://nesfic-i-07-drone-pest-detection.pages.dev">https://nesfic-i-07-drone-pest-detection.pages.dev</a><br/>
 <b>Source Code Repository:</b> <a href="https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection">https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection</a>""", body_style))
+
+    # 7. Indicative Resource & Budget Allocation
+    story.append(Spacer(1, 6))
+    story.append(Paragraph("7. Indicative Resource & Budget Allocation (₹40.0 Lakhs Grant)", section_heading))
+    story.append(Paragraph("""The proposed budget allocates <b>50% (₹20.0 Lakhs) directly to the technical engineering team</b> to ensure robust algorithmic development and edge deployment, with balanced allocations for precision drone hardware, TRA Tocklai field trials, and DGCA regulatory compliance:""", body_style))
+
+    b_head_pow = ParagraphStyle('BHeadPow', parent=cell_bold, textColor=colors.white)
+    pow_budget = [
+        [Paragraph("Budget Category & Resource Head", b_head_pow), Paragraph("Allocation", b_head_pow), Paragraph("% Share", b_head_pow), Paragraph("Key Resource Deliverables", b_head_pow)],
+        [Paragraph("<b>1. Technical Engineering Team & R&D</b>", cell_bold), Paragraph("<b>₹20.0 Lakhs</b>", cell_bold), Paragraph("50.0%", cell_norm), Paragraph("Lead Architect (Rangan Bhuyan), Senior Computer Vision/AI Engineer, UAV Avionics Firmware Engineer, Full-Stack GIS Dev.", cell_norm)],
+        [Paragraph("<b>2. Hardware Assets & Avionics</b>", cell_bold), Paragraph("<b>₹12.0 Lakhs</b>", cell_bold), Paragraph("30.0%", cell_norm), Paragraph("Multispectral scout UAV (₹3.5L), 16L spray hexacopter with PWM nozzles (₹5.5L), Jetson Orin GCS & RTK base (₹3.0L).", cell_norm)],
+        [Paragraph("<b>3. Field Pilot Trials & TRA Testing</b>", cell_bold), Paragraph("<b>₹4.5 Lakhs</b>", cell_bold), Paragraph("11.25%", cell_norm), Paragraph("TRA Tocklai test plots (10 Ha), 100 Ha commercial estate trials, WSP droplet analysis & GC-MS/MS MRL testing.", cell_norm)],
+        [Paragraph("<b>4. Operational Logistics & Regulatory</b>", cell_bold), Paragraph("<b>₹3.5 Lakhs</b>", cell_bold), Paragraph("8.75%", cell_norm), Paragraph("High-cycle smart LiPo battery packs, field generator, transit across Upper Assam, DGCA authorizations.", cell_norm)],
+        [Paragraph("<b>Total Problem Statement Grant</b>", cell_bold), Paragraph("<b>₹40.0 Lakhs</b>", cell_bold), Paragraph("<b>100.0%</b>", cell_bold), Paragraph("<b>Allocated under NESFIC-I-07 Government Track Problem Statement</b>", cell_bold)],
+    ]
+    pbt = Table(pow_budget, colWidths=[2.2 * inch, 1.1 * inch, 0.8 * inch, 3.3 * inch])
+    pbt.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), PRIMARY),
+        ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
+        ('ROWBACKGROUNDS', (0,1), (-1,-2), [colors.white, LIGHT_BG]),
+        ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor("#e2e8f0")),
+        ('PADDING', (0,0), (-1,-1), 3.5),
+    ]))
+    story.append(pbt)
 
     # Footer Box
     disc_text = """<b>Statement of Authenticity:</b> This Proof of Work and Technical Evidence document is submitted as formal supporting material for NESFIC-I-07 under the North East Seva First Innovation Challenge 2026. All algorithms, benchmark figures, and system wireframes represent functional prototypes developed by TeaTech Labs under Lead Applicant Rangan Bhuyan.<br/>
