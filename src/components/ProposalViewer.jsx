@@ -341,21 +341,45 @@ Pilot Validation Roadmap in Assam:
   }
 ];
 
+export function sanitizeForFormText(text) {
+  return text
+    .replace(/</g, 'Smaller than ')
+    .replace(/>/g, 'Greater Than ')
+    .replace(/  +/g, ' ');
+}
+
 export default function ProposalViewer() {
   const [copiedId, setCopiedId] = useState(null);
   const [expandedId, setExpandedId] = useState(1);
 
   const copySection = (id, content) => {
-    navigator.clipboard.writeText(content);
+    navigator.clipboard.writeText(sanitizeForFormText(content));
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const getCleanFullText = () => {
+    return PROPOSAL_SECTIONS.map(
+      (s) => `${sanitizeForFormText(s.title)}\n\n${sanitizeForFormText(s.content)}\n\n${'-'.repeat(40)}`
+    ).join('\n\n');
+  };
+
   const copyAll = () => {
-    const fullText = PROPOSAL_SECTIONS.map(s => `${s.title}\n\n${s.content}\n\n${'-'.repeat(40)}`).join('\n\n');
-    navigator.clipboard.writeText(fullText);
+    navigator.clipboard.writeText(getCleanFullText());
     setCopiedId('all');
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const downloadPlainText = () => {
+    const blob = new Blob([getCleanFullText()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'NESFIC-I-07_Proposal_Form_Text.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -395,6 +419,14 @@ export default function ProposalViewer() {
             <Download className="w-3.5 h-3.5" />
             <span>Download Proof of Work PDF</span>
           </a>
+
+          <button
+            onClick={downloadPlainText}
+            className="px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Form Text (.txt)</span>
+          </button>
 
           <button
             onClick={copyAll}
@@ -603,7 +635,7 @@ export default function ProposalViewer() {
               {isExpanded && (
                 <div className="px-5 pb-5 pt-2 border-t border-slate-100">
                   <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 font-sans text-xs text-slate-800 whitespace-pre-line leading-relaxed selection:bg-amber-100">
-                    {sec.content}
+                    {sanitizeForFormText(sec.content)}
                   </div>
 
                   <div className="flex items-center justify-between mt-3 text-xs text-slate-500">
