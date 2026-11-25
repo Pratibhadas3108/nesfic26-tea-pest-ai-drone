@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import Overview from './components/Overview';
@@ -10,12 +10,69 @@ import ProposalViewer from './components/ProposalViewer';
 import AdminConsole from './components/AdminConsole';
 import TutorialModal from './components/TutorialModal';
 import { ESTATES } from './data/mockData';
+import { APP_ROUTES, BASE_URL, getTabFromPath } from './routes';
 import { ShieldCheck, GitBranch, ExternalLink, BookOpen } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('landing');
+  const initialTabFromUrl = typeof window !== 'undefined' ? getTabFromPath(window.location.pathname) : 'landing';
+  const [activeTab, setActiveTabState] = useState(initialTabFromUrl === 'tutorial' ? 'landing' : initialTabFromUrl);
   const [selectedEstate, setSelectedEstate] = useState(ESTATES[0]);
-  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(initialTabFromUrl === 'tutorial');
+
+  const updateHeadMeta = useCallback((routeKey) => {
+    const meta = APP_ROUTES[routeKey] || APP_ROUTES.landing;
+    document.title = meta.title;
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) descEl.setAttribute('content', meta.description);
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (canonicalEl) canonicalEl.setAttribute('href', `${BASE_URL}${meta.path === '/' ? '/' : meta.path}`);
+  }, []);
+
+  const setActiveTab = useCallback((tab) => {
+    const targetTab = APP_ROUTES[tab] ? tab : 'landing';
+    setActiveTabState(targetTab);
+    setIsTutorialOpen(false);
+    const meta = APP_ROUTES[targetTab];
+    if (typeof window !== 'undefined' && window.location.pathname !== meta.path) {
+      window.history.pushState({ tab: targetTab }, '', meta.path);
+    }
+    updateHeadMeta(targetTab);
+  }, [updateHeadMeta]);
+
+  const openTutorial = useCallback(() => {
+    setIsTutorialOpen(true);
+    const meta = APP_ROUTES.tutorial;
+    if (typeof window !== 'undefined' && window.location.pathname !== meta.path) {
+      window.history.pushState({ tab: activeTab, tutorial: true }, '', meta.path);
+    }
+    updateHeadMeta('tutorial');
+  }, [activeTab, updateHeadMeta]);
+
+  const closeTutorial = useCallback(() => {
+    setIsTutorialOpen(false);
+    const meta = APP_ROUTES[activeTab] || APP_ROUTES.landing;
+    if (typeof window !== 'undefined' && window.location.pathname === APP_ROUTES.tutorial.path) {
+      window.history.pushState({ tab: activeTab }, '', meta.path);
+    }
+    updateHeadMeta(activeTab);
+  }, [activeTab, updateHeadMeta]);
+
+  useEffect(() => {
+    updateHeadMeta(isTutorialOpen ? 'tutorial' : activeTab);
+    const handlePopState = () => {
+      const tabFromUrl = getTabFromPath(window.location.pathname);
+      if (tabFromUrl === 'tutorial') {
+        setIsTutorialOpen(true);
+        updateHeadMeta('tutorial');
+      } else {
+        setIsTutorialOpen(false);
+        setActiveTabState(tabFromUrl);
+        updateHeadMeta(tabFromUrl);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [activeTab, isTutorialOpen, updateHeadMeta]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
@@ -26,13 +83,14 @@ export default function App() {
         selectedEstate={selectedEstate}
         setSelectedEstate={setSelectedEstate}
         estates={ESTATES}
-        setIsTutorialOpen={setIsTutorialOpen}
+        isTutorialOpen={isTutorialOpen}
+        openTutorial={openTutorial}
       />
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'landing' && (
-          <LandingPage setActiveTab={setActiveTab} setIsTutorialOpen={setIsTutorialOpen} />
+          <LandingPage setActiveTab={setActiveTab} setIsTutorialOpen={openTutorial} />
         )}
         {activeTab === 'overview' && (
           <Overview setActiveTab={setActiveTab} selectedEstate={selectedEstate} />
@@ -60,7 +118,7 @@ export default function App() {
       {/* Interactive Tutorial Modal */}
       <TutorialModal
         isOpen={isTutorialOpen}
-        onClose={() => setIsTutorialOpen(false)}
+        onClose={closeTutorial}
         setActiveTab={setActiveTab}
       />
 
@@ -93,13 +151,18 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsTutorialOpen(true)}
+              <a
+                href={APP_ROUTES.tutorial.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openTutorial();
+                }}
+                title="Learn what AeroPest-Tea does and how to use it"
                 className="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold text-xs transition-colors flex items-center gap-1.5"
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Tutorial Guide</span>
-              </button>
+              </a>
 
               <a
                 href="https://nesfic26-tea-pest-ai-drone.pages.dev"

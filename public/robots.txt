@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nesfic26-tea-pest-ai-drone.pages.dev/sitemap.xml

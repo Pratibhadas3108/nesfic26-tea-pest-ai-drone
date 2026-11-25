@@ -21,6 +21,19 @@ export default function TutorialModal({ isOpen, onClose, setActiveTab }) {
 
   const tutorialSteps = [
     {
+      title: "What AeroPest-Tea Does (Overview)",
+      badge: "Platform Purpose",
+      icon: Sparkles,
+      color: "blue",
+      description: "AeroPest-Tea is an AI-driven drone crop protection platform built for Assam tea plantations. It replaces wasteful blanket chemical spraying with autonomous aerial scouting, millimeter-scale AI pest detection (Helopeltis & Red Spider Mite), centimeter-accurate spot-spraying, and automated TRA Tocklai MRL export compliance.",
+      actionLabel: "View Platform Overview",
+      targetTab: "landing",
+      tips: [
+        "Cuts agrochemical usage by up to 68.4% while protecting beneficial natural predators and soil health.",
+        "Ensures 100% EU & FSSAI Maximum Residue Limit (MRL) compliance before leaf plucking begins."
+      ]
+    },
+    {
       title: "Step 1: Inspect Garden Sections & Telemetry",
       badge: "GIS Mission Map",
       icon: MapPin,
