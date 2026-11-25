@@ -704,6 +704,14 @@ Rangan Bhuyan brings over 8 years of specialized engineering experience in auton
         ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
     story.append(pbt)
+    story.append(Spacer(1, 8))
+
+    # EMBED FIGURE: Budget Allocation Framework
+    budget_img = get_image_flowable('budget_allocation_framework.png', width=7.0*inch, height=3.94*inch)
+    if budget_img:
+        story.append(budget_img)
+        story.append(Paragraph("<b>Figure 5:</b> NESFIC-I-07 Indicative Resource &amp; Budget Allocation Framework (₹40.0 Lakhs Grant)", fig_caption))
+        story.append(Spacer(1, 8))
 
     # Footer Box
     disc_text = """<b>Statement of Authenticity:</b> This Proof of Work and Technical Evidence document is submitted as formal supporting material for NESFIC-I-07 under the North East Seva First Innovation Challenge 2026. All algorithms, benchmark figures, and system wireframes represent functional prototypes developed by TeaTech Labs under Lead Applicant Rangan Bhuyan.<br/>
