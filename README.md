@@ -56,7 +56,7 @@ Historically, estates have relied on labor-intensive physical scouting covering 
 
 ```bash
 # Clone the repository
-git clone https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection.git
+git clone https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone.git
 cd nesfic-i-07-drone-pest-detection
 
 # Install dependencies

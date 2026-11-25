@@ -194,7 +194,7 @@ def build_proposal_pdf(output_path):
             Paragraph("Live Deployment URL:", meta_table_label),
             Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", meta_table_val),
             Paragraph("GitHub Repository:", meta_table_label),
-            Paragraph("RonHatibaruah/nesfic-i-07-drone-pest-detection", meta_table_val),
+            Paragraph("Pratibhadas3108/nesfic26-tea-pest-ai-drone", meta_table_val),
         ],
         [
             Paragraph("Validation Testbed:", meta_table_label),
@@ -549,7 +549,7 @@ def build_pow_pdf(output_path):
         ],
         [
             Paragraph("Live Platform URL:", cell_bold), Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", cell_norm),
-            Paragraph("GitHub Source Code:", cell_bold), Paragraph("RonHatibaruah/nesfic-i-07-drone-pest-detection", cell_norm)
+            Paragraph("GitHub Source Code:", cell_bold), Paragraph("Pratibhadas3108/nesfic26-tea-pest-ai-drone", cell_norm)
         ]
     ]
     t = Table(meta_data, colWidths=[1.4 * inch, 2.3 * inch, 1.4 * inch, 2.4 * inch])
@@ -679,7 +679,7 @@ def build_pow_pdf(output_path):
     story.append(Paragraph("""<b>Lead Applicant: Rangan Bhuyan</b> (Founder & Precision Agriculture Systems Architect, TeaTech Labs)<br/>
 Rangan Bhuyan brings over 8 years of specialized engineering experience in autonomous drone systems, embedded edge computing, and precision viticulture/crop protection. Supported by senior computer vision researchers, avionics hardware engineers, licensed DGCA remote pilots, and entomological advisors aligned with the Tea Research Association (TRA) Tocklai.<br/><br/>
 <b>Verified Live Application URL:</b> <a href="https://nesfic-i-07-drone-pest-detection.pages.dev">https://nesfic-i-07-drone-pest-detection.pages.dev</a><br/>
-<b>Source Code Repository:</b> <a href="https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection">https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection</a>""", body_style))
+<b>Source Code Repository:</b> <a href="https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone">https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone</a>""", body_style))
 
     # 7. Indicative Resource & Budget Allocation
     story.append(Spacer(1, 6))

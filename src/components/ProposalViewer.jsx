@@ -521,12 +521,12 @@ export default function ProposalViewer() {
           <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs">
             <span className="text-slate-500 block font-medium">Demo / Product Video URL:</span>
             <a
-              href="https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection"
+              href="https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone"
               target="_blank"
               rel="noreferrer"
               className="text-navy-700 hover:underline font-mono font-medium mt-1 block truncate"
             >
-              https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection
+              https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone
             </a>
             <span className="text-[10px] text-slate-500 mt-1 block">Simulation & Video walk-through</span>
           </div>

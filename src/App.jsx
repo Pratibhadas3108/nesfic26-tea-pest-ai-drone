@@ -111,7 +111,7 @@ export default function App() {
               </a>
 
               <a
-                href="https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection"
+                href="https://github.com/Pratibhadas3108/nesfic26-tea-pest-ai-drone"
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-medium text-xs transition-colors flex items-center gap-1.5"
