@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PDF Generator for NESFIC-I-07: AeroPest-Tea
+PDF Generator for NESFIC-I-07: AeroPest-Tea with Embedded Visual Diagrams
 Generates:
 1. public/NESFIC-I-07_Proposal_Document.pdf
 2. public/NESFIC-I-07_AeroPest_Tea_Proof_Of_Work.pdf
@@ -12,9 +12,11 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Image
 )
 from reportlab.pdfgen import canvas
+
+ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'assets')
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
@@ -35,7 +37,7 @@ class NumberedCanvas(canvas.Canvas):
 
     def draw_page_decorations(self, page_count):
         self.saveState()
-        self.setFont("Helvetica", 8)
+        self.setFont("Helvetica-Bold", 8)
         self.setFillColor(colors.HexColor("#64748b"))
         
         # Header (pages > 1)
@@ -49,13 +51,21 @@ class NumberedCanvas(canvas.Canvas):
         # Footer (all pages)
         self.setStrokeColor(colors.HexColor("#cbd5e1"))
         self.setLineWidth(0.5)
-        self.line(54, 48, 8.5 * inch - 54, 48)
+        self.line(54, 46, 8.5 * inch - 54, 46)
         
+        self.setFont("Helvetica", 7.8)
         footer_text = "Confidential • Assam Startup Innovation Challenge (NESFIC 2026) • © 2026 TeaTech Labs"
         page_text = f"Page {self._pageNumber} of {page_count}"
-        self.drawString(54, 34, footer_text)
-        self.drawRightString(8.5 * inch - 54, 34, page_text)
+        self.drawString(54, 32, footer_text)
+        self.drawRightString(8.5 * inch - 54, 32, page_text)
         self.restoreState()
+
+
+def get_image_flowable(filename, width=7.0*inch, height=2.24*inch):
+    filepath = os.path.join(ASSETS_DIR, filename)
+    if os.path.exists(filepath):
+        return Image(filepath, width=width, height=height)
+    return None
 
 
 def build_proposal_pdf(output_path):
@@ -70,7 +80,6 @@ def build_proposal_pdf(output_path):
 
     styles = getSampleStyleSheet()
     
-    # Custom Palette
     PRIMARY = colors.HexColor("#064e3b")     # Dark Forest Emerald
     SECONDARY = colors.HexColor("#0f172a")   # Slate Navy
     ACCENT = colors.HexColor("#059669")      # Emerald Green
@@ -78,35 +87,34 @@ def build_proposal_pdf(output_path):
     LIGHT_BG = colors.HexColor("#f8fafc")    # Off-white / light slate
     BORDER_COLOR = colors.HexColor("#e2e8f0")
 
-    # Typography Styles
     title_style = ParagraphStyle(
         'DocTitle',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=20,
-        leading=24,
+        fontSize=18,
+        leading=22,
         textColor=PRIMARY,
-        spaceAfter=6
+        spaceAfter=4
     )
 
     subtitle_style = ParagraphStyle(
         'DocSub',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=10,
-        leading=14,
+        fontSize=9.5,
+        leading=13,
         textColor=SECONDARY,
-        spaceAfter=12
+        spaceAfter=10
     )
 
     section_heading = ParagraphStyle(
         'SecHeading',
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
-        fontSize=12,
-        leading=16,
+        fontSize=11.5,
+        leading=15,
         textColor=PRIMARY,
-        spaceBefore=12,
+        spaceBefore=10,
         spaceAfter=4,
         keepWithNext=True
     )
@@ -115,10 +123,10 @@ def build_proposal_pdf(output_path):
         'DocBody',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9,
-        leading=13,
+        fontSize=8.5,
+        leading=12.2,
         textColor=colors.HexColor("#1e293b"),
-        spaceAfter=8
+        spaceAfter=6
     )
 
     meta_badge = ParagraphStyle(
@@ -134,8 +142,8 @@ def build_proposal_pdf(output_path):
         'MetaLabel',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=8.5,
-        leading=11,
+        fontSize=8,
+        leading=10.5,
         textColor=PRIMARY
     )
 
@@ -143,63 +151,78 @@ def build_proposal_pdf(output_path):
         'MetaVal',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.5,
-        leading=11,
+        fontSize=8,
+        leading=10.5,
         textColor=SECONDARY
+    )
+
+    fig_caption = ParagraphStyle(
+        'FigCap',
+        parent=styles['Normal'],
+        fontName='Helvetica-Bold',
+        fontSize=7.8,
+        leading=10,
+        textColor=colors.HexColor("#475569"),
+        alignment=1, # Center
+        spaceBefore=3,
+        spaceAfter=8
     )
 
     story = []
 
     # Title Banner Block
-    story.append(Paragraph("NORTH EAST SEVA FIRST INNOVATION CHALLENGE (NESFIC) 2026", meta_badge))
-    story.append(Paragraph("NESFIC-I-07: AeroPest-Tea Proposal Document", title_style))
+    story.append(Paragraph("NORTH EAST SEVA FIRST INNOVATION CHALLENGE (NESFIC) 2026 • GOVERNMENT TRACK", meta_badge))
+    story.append(Paragraph("NESFIC-I-07: AeroPest-Tea Grant Proposal", title_style))
     story.append(Paragraph("AI-Driven Drone-Based Pest Detection & Targeted Spot-Spraying for Assam Tea Plantations", subtitle_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=2, spaceAfter=10))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=0, spaceAfter=8))
 
     # Metadata Summary Table
     meta_data = [
         [
-            Paragraph("Problem Statement ID:", meta_table_label),
-            Paragraph("NESFIC-I-07 (Government Track)", meta_table_val),
-            Paragraph("Submitting Organization:", meta_table_label),
-            Paragraph("TeaTech Labs", meta_table_val),
+            Paragraph("Problem ID:", meta_table_label),
+            Paragraph("NESFIC-I-07", meta_table_val),
+            Paragraph("Submitting Entity:", meta_table_label),
+            Paragraph("<b>TeaTech Labs</b> (Assam, India)", meta_table_val),
         ],
         [
             Paragraph("Partner Stakeholder:", meta_table_label),
             Paragraph("Tea Research Association (TRA) Tocklai", meta_table_val),
             Paragraph("Lead Applicant:", meta_table_label),
-            Paragraph("<b>Rangan Bhuyan</b> (Lead Architect)", meta_table_val),
+            Paragraph("<b>Rangan Bhuyan</b> (Lead Systems Architect)", meta_table_val),
         ],
         [
             Paragraph("Live Deployment URL:", meta_table_label),
-            Paragraph("https://nesfic-i-07-drone-pest-detection.pages.dev", meta_table_val),
+            Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", meta_table_val),
             Paragraph("GitHub Repository:", meta_table_label),
             Paragraph("RonHatibaruah/nesfic-i-07-drone-pest-detection", meta_table_val),
         ],
         [
-            Paragraph("Pilot Location:", meta_table_label),
-            Paragraph("Jorhat & Upper Assam Tea Division", meta_table_val),
+            Paragraph("Validation Testbed:", meta_table_label),
+            Paragraph("TRA Tocklai Station, Jorhat (Section 4B)", meta_table_val),
             Paragraph("Legal Copyright:", meta_table_label),
             Paragraph("© 2026 TeaTech Labs. All rights reserved.", meta_table_val),
         ]
     ]
 
-    t = Table(meta_data, colWidths=[1.5 * inch, 2.3 * inch, 1.4 * inch, 2.3 * inch])
+    t = Table(meta_data, colWidths=[1.4 * inch, 2.3 * inch, 1.4 * inch, 2.4 * inch])
     t.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), LIGHT_BG),
         ('BOX', (0,0), (-1,-1), 1, BORDER_COLOR),
         ('INNERGRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
-        ('TOPPADDING', (0,0), (-1,-1), 4),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
-        ('LEFTPADDING', (0,0), (-1,-1), 6),
-        ('RIGHTPADDING', (0,0), (-1,-1), 6),
+        ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
     story.append(t)
-    story.append(Spacer(1, 14))
+    story.append(Spacer(1, 8))
 
-    # All 12 Sections
+    # EMBED FIGURE 1: Workflow Pipeline right upfront
+    wf_img = get_image_flowable('workflow_pipeline.png', width=7.0*inch, height=2.24*inch)
+    if wf_img:
+        story.append(wf_img)
+        story.append(Paragraph("<b>Figure 1:</b> AeroPest-Tea Closed-Loop Precision Crop Protection Workflow", fig_caption))
+
+    # Sections Content
     sections = [
-        ("1. Problem Understanding & User Workflow", "342 / 500 words", """Assam produces over 50% of India's tea, serving as the economic backbone of the Northeast. However, tea plantations face escalating economic and ecological threats from pest and disease complexes, notably the Tea Mosquito Bug (Helopeltis theivora), Red Spider Mite (Oligonychus coffeae), and Looper Caterpillar (Hyposidra talaca). The warm, humid monsoon climate of the Brahmaputra Valley accelerates pest life cycles, causing annual crop loss between 15% and 30%.<br/><br/>
+        ("1. Problem Understanding & User Workflow", "342 / 500 words", """Assam produces over 50% of India's tea, serving as the economic backbone of the Northeast. However, tea plantations face escalating economic and ecological threats from pest and disease complexes, notably the <b>Tea Mosquito Bug</b> (<i>Helopeltis theivora</i>), <b>Red Spider Mite</b> (<i>Oligonychus coffeae</i>), and <b>Looper Caterpillar</b> (<i>Hyposidra talaca</i>). The warm, humid monsoon climate of the Brahmaputra Valley accelerates pest life cycles, causing annual crop loss between 15% and 30%.<br/><br/>
 <b>Current Workflow & Bottlenecks:</b><br/>
 Today, tea estates rely on manual scouting where field workers physically inspect only a minuscule fraction (<2%) of expansive garden sections. Because early micro-infestations go undetected under dense canopies, estates resort to calendar-based blanket chemical spraying using manual knapsack sprayers or tractor booms.<br/><br/>
 <b>Specific Gaps Addressed:</b><br/>
@@ -208,20 +231,20 @@ Today, tea estates rely on manual scouting where field workers physically inspec
 3. <i>Export & MRL Non-Compliance:</i> Blanket spraying elevates chemical residues beyond Maximum Residue Limits (MRLs) stipulated by FSSAI, the European Union (EU), and Codex standards, leading to rejection of export tea consignments.<br/>
 4. <i>Severe Labor Shortage & Health Hazards:</i> Manual knapsack spraying exposes workers to toxic chemical mists while garden managers struggle with peak-season labor deficits.<br/><br/>
 <b>Target Users & Beneficiaries:</b><br/>
-Primary Users: Tea Estate Managers, Garden Superintendents, Field Assistants, and Drone Pilots.<br/>
-Direct Beneficiaries: Small tea growers (STGs) lacking scouting resources, plantation laborers spared from toxic exposure, and research bodies like TRA Tocklai.<br/><br/>
-<b>Intended Outcomes:</b> Deploy an autonomous drone-based AI detection and targeted spot-spraying system that reduces overall agrochemical consumption by 60%–75%, lowers operating costs by 45%, maintains zero-exceedance MRL compliance, and identifies pest infestations 5 to 7 days earlier than conventional scouting."""),
+• Primary Users: Tea Estate Managers, Garden Superintendents, Field Assistants, and Drone Pilots.<br/>
+• Direct Beneficiaries: Small tea growers (STGs) lacking scouting resources, plantation laborers spared from toxic exposure, and research bodies like TRA Tocklai.<br/><br/>
+<b>Intended Outcomes:</b> Deploy an autonomous drone-based AI detection and targeted spot-spraying system that reduces overall agrochemical consumption by <b>60%–75%</b>, lowers operating costs by <b>45%</b>, maintains zero-exceedance MRL compliance, and identifies pest infestations 5 to 7 days earlier than conventional scouting.""", None),
 
         ("2. Proposed Solution & Key Features", "358 / 500 words", """<b>Solution Overview:</b><br/>
-We propose 'AeroPest-Tea', an autonomous, closed-loop precision viticulture and crop protection system engineered specifically for tea agro-ecosystems by TeaTech Labs under Lead Applicant Rangan Bhuyan. The solution pairs high-resolution aerial multispectral/RGB scouting drones with edge AI detection, translating canopy infection hotspots into automated, centimeter-accurate Variable-Rate Application (VRA) spot-spraying missions.<br/><br/>
+We propose <b>'AeroPest-Tea'</b>, an autonomous, closed-loop precision viticulture and crop protection system engineered specifically for tea agro-ecosystems by TeaTech Labs under Lead Applicant Rangan Bhuyan. The solution pairs high-resolution aerial multispectral/RGB scouting drones with edge AI detection, translating canopy infection hotspots into automated, centimeter-accurate Variable-Rate Application (VRA) spot-spraying missions.<br/><br/>
 <b>Main Modules & Functions:</b><br/>
 1. <i>Autonomous Aerial Survey Module:</i> Lightweight scouting drones fly pre-programmed autonomous terrain-following grid paths at 15–20 m AGL, capturing geotagged, sub-centimeter RGB and multispectral imagery.<br/>
 2. <i>Edge & Cloud Computer Vision Diagnostic Engine:</i> A fine-tuned YOLOv11 and semantic segmentation pipeline trained on tea pest leaf and canopy symptoms. It classifies pest species, quantifies infestation severity (Stage 1 initial feeding punctures to Stage 3 necrosis), and tags geographic coordinates.<br/>
 3. <i>Prescription & VRA Generator:</i> Converts pest density heatmaps into standard GIS prescription maps (GeoJSON/KML), defining precise micro-polygons around infested tea bushes with zero-spray buffers for healthy zones.<br/>
 4. <i>Targeted Spot-Spraying Drone System:</i> A DGCA-compliant agricultural drone equipped with RTK centimeter-precision positioning, pulse-width modulation (PWM) solenoid nozzles, and intelligent downward airflow control to deliver ultra-low-volume (ULV) droplets directly into infected bushes.<br/>
 5. <i>Estate Decision Support & TRA Compliance Portal:</i> Cloud/offline web dashboard providing plantation health indices (NDVI/SAVI), pest severity GIS layers, automated flight logs, and Pre-Harvest Interval (PHI) MRL warnings aligned with TRA Tocklai guidelines.<br/><br/>
-<b>User Interaction:</b> The Estate Manager selects a section on the interactive map and initiates a mission. The scout drone completes the survey, the AI engine processes the imagery within 20 minutes, and the system prompts: '3.2 hectares infested out of 25 hectares. Review Spot-Spraying Prescription?' Upon confirmation, the coordinate package loads onto the spray drone, executing precise spot applications.<br/><br/>
-<b>What Changes Versus Current Approach:</b> Shifts tea protection from reactive, calendar-based blanket pesticide drenching to proactive, surgical micro-targeted spot treatments—protecting beneficial predators, slashing chemical costs, and preserving tea export value."""),
+<b>User Interaction:</b> The Estate Manager selects a section on the interactive map and initiates a mission. The scout drone completes the survey, the AI engine processes the imagery within 20 minutes, and the system prompts: <i>'3.2 hectares infested out of 25 hectares. Review Spot-Spraying Prescription?'</i> Upon confirmation, the coordinate package loads onto the spray drone, executing precise spot applications.<br/><br/>
+<b>What Changes Versus Current Approach:</b> Shifts tea protection from reactive, calendar-based blanket pesticide drenching to proactive, surgical micro-targeted spot treatments—protecting beneficial predators, slashing chemical costs, and preserving tea export value.""", None),
 
         ("3. User Journey, Wireframes, Prototype & Proof of Work", "378 / 500 words", """<b>User Journey & Operational Workflow:</b><br/>
 1. <i>Mission Setup:</i> Field Assistant opens the mobile/web interface, selects Garden Section 4B (Jorhat Estate), and taps 'Autonomous Survey Flight'.<br/>
@@ -231,30 +254,25 @@ We propose 'AeroPest-Tea', an autonomous, closed-loop precision viticulture and 
 5. <i>Automated Spot-Spraying:</i> The prescription uploads to the RTK-equipped spray drone. The drone navigates autonomously, opening PWM nozzles exclusively above designated hotspot clusters while completely shutting off over healthy bushes.<br/>
 6. <i>Compliance Verification:</i> System archives flight telemetry, chemical volume sprayed (e.g., 28 L instead of 120 L), and calculates the Pre-Harvest Interval (PHI) date.<br/><br/>
 <b>Supporting Artifacts & Wireframes:</b><br/>
-- <i>Screen 1: Garden Section GIS Overview:</i> Vector layer of tea blocks with color-coded health status (Green: Healthy, Amber: Mild, Red: Critical Hotspot).<br/>
-- <i>Screen 2: AI Diagnostic Studio:</i> Dual-panel image viewer displaying raw drone photo beside AI inference bounding boxes with confidence scores (e.g., Helopeltis theivora: 94.2%, Severity: Medium).<br/>
-- <i>Screen 3: Mission Prescription & VRA Controller:</i> Interactive waypoint path with solenoid open/close triggers, live tank level, flow rate (L/min), and real-time battery telemetry.<br/>
-- <i>Screen 4: MRL & PHI Compliance Ledger:</i> Export-readiness gauge, batch traceability log, and chemical inventory ledger.<br/><br/>
-<b>Prototype & Proof of Work Evidence:</b> We have engineered a working interactive simulation and decision-support prototype featuring live Leaflet GIS layers, simulated drone flight telemetry, edge detection analytics on tea pest imagery, and automated GeoJSON prescription generation. Validation tests against benchmark datasets demonstrate a 91.4% mAP@50 detection accuracy for Helopeltis lesions under natural lighting conditions. Complete wireframes, architectural schematics, test bench metrics, and field simulation outputs are compiled in our accompanying Proof of Work document."""),
+• Screen 1: Garden Section GIS Overview — Vector layer of tea blocks with color-coded health status (Green: Healthy, Amber: Mild, Red: Critical Hotspot).<br/>
+• Screen 2: AI Diagnostic Studio — Dual-panel image viewer displaying raw drone photo beside AI inference bounding boxes with confidence scores (e.g., Helopeltis: 94.2%).<br/>
+• Screen 3: Mission Prescription & VRA Controller — Interactive waypoint path with solenoid open/close triggers, live tank level, flow rate (L/min), and real-time battery telemetry.<br/>
+• Screen 4: MRL & PHI Compliance Ledger — Export-readiness gauge, batch traceability log, and chemical inventory ledger.<br/><br/>
+<b>Prototype & Proof of Work Evidence:</b> We have engineered a working interactive simulation and decision-support prototype featuring live Leaflet GIS layers, simulated drone flight telemetry, edge detection analytics on tea pest imagery, and automated GeoJSON prescription generation. Validation tests against benchmark datasets demonstrate a 91.4% mAP@50 detection accuracy for Helopeltis lesions under natural lighting conditions. Complete wireframes, architectural schematics, test bench metrics, and field simulation outputs are compiled in our accompanying Proof of Work document.""", 'blanket_vs_spotspray.png'),
 
-        ("4. Technology & Solution Architecture", "368 / 500 words", """<b>Architecture Overview:</b><br/>
-The system implements a three-tier edge-to-cloud architecture designed for remote plantation connectivity:<br/><br/>
+        ("4. Technology & Solution Architecture", "368 / 500 words", """<b>Architecture Overview:</b> The system implements a three-tier edge-to-cloud architecture designed for remote plantation connectivity:<br/><br/>
 <b>1. Hardware & Drone Layer:</b><br/>
-- <i>Scouting UAV:</i> Quadcopter with 20 MP RGB global-shutter sensor + 5-band multispectral camera (NIR, RedEdge, Red, Green, Blue) with RTK-GNSS positioning.<br/>
-- <i>Spraying UAV:</i> Type-certified agricultural hexacopter (10–16 L payload) with dual RTK GPS, obstacle-avoidance LiDAR, millimeter-wave radar, and 4 high-frequency PWM solenoid nozzles with variable droplet control (150–250 microns).<br/>
-- <i>Edge Computing:</i> NVIDIA Jetson Orin Nano on the Ground Control Station (GCS) for offline field processing in low-connectivity tea gardens.<br/><br/>
+• <i>Scouting UAV:</i> Quadcopter with 20 MP RGB global-shutter sensor + 5-band multispectral camera (NIR, RedEdge, Red, Green, Blue) with RTK-GNSS positioning.<br/>
+• <i>Spraying UAV:</i> Type-certified agricultural hexacopter (10–16 L payload) with dual RTK GPS, obstacle-avoidance LiDAR, millimeter-wave radar, and 4 high-frequency PWM solenoid nozzles with variable droplet control (150–250 microns).<br/>
+• <i>Edge Computing:</i> NVIDIA Jetson Orin Nano on the Ground Control Station (GCS) for offline field processing in low-connectivity tea gardens.<br/><br/>
 <b>2. Software & AI/ML Stack:</b><br/>
-- <i>Computer Vision:</i> Fine-tuned YOLOv11x / YOLOv10 for object detection, combined with DeepLabV3+ for canopy leaf segmentation and vegetative index computation (NDVI, NDRE, SAVI).<br/>
-- <i>Photogrammetry:</i> OpenSfM / WebODM engine for rapid, automated orthomosaic stitching and digital elevation model (DEM) extraction.<br/>
-- <i>Frontend Web & Mobile:</i> React, Vite, Tailwind CSS, Leaflet / MapLibre GL for high-performance GIS geospatial rendering.<br/>
-- <i>Backend & APIs:</i> FastAPI (Python) microservices, GeoPandas for spatial geometry calculations, PostgreSQL with PostGIS extension for spatial vector queries.<br/><br/>
+• <i>Computer Vision:</i> Fine-tuned YOLOv11x / YOLOv10 for object detection, combined with DeepLabV3+ for canopy leaf segmentation and vegetative index computation (NDVI, NDRE, SAVI).<br/>
+• <i>Photogrammetry:</i> OpenSfM / WebODM engine for rapid, automated orthomosaic stitching and digital elevation model (DEM) extraction.<br/>
+• <i>Frontend Web & Mobile:</i> React, Vite, Tailwind CSS, Leaflet / MapLibre GL for high-performance GIS geospatial rendering.<br/>
+• <i>Backend & APIs:</i> FastAPI (Python) microservices, GeoPandas for spatial geometry calculations, PostgreSQL with PostGIS extension for spatial vector queries.<br/><br/>
 <b>3. Data Flow & Integrations:</b><br/>
-1. Scout drone streams geotagged frames to the GCS via 2.4/5.8 GHz encrypted telemetry.<br/>
-2. GCS performs edge inference and photogrammetric spatial orthorectification.<br/>
-3. AI outputs are clustered into geospatial bounding polygons and converted into MAVLink / GeoJSON waypoint mission formats.<br/>
-4. The spray drone receives the mission over MAVLink (ArduPilot / PX4) with automated altitude compensation based on terrain elevation models.<br/>
-5. Post-flight telemetry and spraying audit logs synchronize with the cloud database upon cellular/Wi-Fi connection.<br/><br/>
-<b>Hosting & Deployment:</b> Hybrid deployment model: fully offline-capable GCS runtime for field operations in remote gardens of Upper Assam and Cachar, syncing with state-hosted cloud instances (e.g., SDC Assam / AWS GovCloud) for centralized enterprise monitoring across multi-estate groups."""),
+Scout drone streams geotagged frames to the GCS via 2.4/5.8 GHz encrypted telemetry. GCS performs edge inference and photogrammetric spatial orthorectification. AI outputs are clustered into geospatial bounding polygons and converted into MAVLink / GeoJSON waypoint mission formats. The spray drone receives the mission over MAVLink (ArduPilot / PX4) with automated altitude compensation based on terrain elevation models. Post-flight telemetry and spraying audit logs synchronize with the cloud database upon cellular/Wi-Fi connection.<br/><br/>
+<b>Hosting & Deployment:</b> Hybrid deployment model: fully offline-capable GCS runtime for field operations in remote gardens of Upper Assam and Cachar, syncing with state-hosted cloud instances (e.g., SDC Assam / AWS GovCloud) for centralized enterprise monitoring across multi-estate groups.""", None),
 
         ("5. Development Methodology & Intermediate Steps", "348 / 500 words", """<b>Methodology:</b> We employ an Agile-Stage-Gate hybrid development framework tailored for hardware-software integration, divided into six iterative stages with concrete deliverables:<br/><br/>
 <b>Stage 1: Discovery & Requirements Engineering (Weeks 1–4)</b><br/>
@@ -268,43 +286,43 @@ Interface MAVLink mission controllers with RTK-GNSS and PWM spray solenoids. Dev
 <b>Stage 5: Minimum Viable Product (MVP) Field Trials (Weeks 23–28)</b><br/>
 Execute controlled field testing at designated experimental tea plots. Verify spot-spray droplet coverage using water-sensitive paper (WSP) cards. <i>Deliverable:</i> MVP Flight Test Report with quantitative chemical savings metrics.<br/><br/>
 <b>Stage 6: Refinement, Dashboard Integration & Pilot Readiness (Weeks 29–36)</b><br/>
-Refine offline sync, user management, and MRL compliance tracking. Package production release and conduct user onboarding for estate staff. <i>Deliverable:</i> Commercial Pilot-Ready Solution with TRA Endorsement."""),
+Refine offline sync, user management, and MRL compliance tracking. Package production release and conduct user onboarding for estate staff. <i>Deliverable:</i> Commercial Pilot-Ready Solution with TRA Endorsement.""", None),
 
         ("6. Development Timeline & Milestones", "338 / 500 words", """<b>Indicative 9-Month Timeline (36 Weeks):</b><br/><br/>
 <b>Phase 1: Discovery & Protocol Setup (M1 / Weeks 1–4)</b><br/>
-- Milestone 1.1: Agronomic threshold requirements documented with TRA Tocklai.<br/>
-- Milestone 1.2: DGCA regulatory clearance and pilot site permits obtained.<br/>
-- Key Deliverable: Signed Validation Protocol & Site Access.<br/><br/>
+• Milestone 1.1: Agronomic threshold requirements documented with TRA Tocklai.<br/>
+• Milestone 1.2: DGCA regulatory clearance and pilot site permits obtained.<br/>
+Key Deliverable: Signed Validation Protocol & Site Access.<br/><br/>
 <b>Phase 2: Data Pipeline & Vision Modeling (M2–M3 / Weeks 5–12)</b><br/>
-- Milestone 2.1: 15k+ image dataset labeled & validated.<br/>
-- Milestone 2.2: Trained edge AI model achieving >90% precision on Helopeltis and Red Spider Mite.<br/>
-- Key Deliverable: Quantized YOLOv11 Model & Benchmark Dossier.<br/><br/>
+• Milestone 2.1: 15k+ image dataset labeled & validated.<br/>
+• Milestone 2.2: Trained edge AI model achieving >90% precision on Helopeltis and Red Spider Mite.<br/>
+Key Deliverable: Quantized YOLOv11 Model & Benchmark Dossier.<br/><br/>
 <b>Phase 3: Hardware Integration & Software MVP (M4–M5 / Weeks 13–20)</b><br/>
-- Milestone 3.1: Drone GCS and PWM nozzle hardware interfaced.<br/>
-- Milestone 3.2: Interactive GIS portal & VRA prescription generator built.<br/>
-- Key Deliverable: Laboratory Tested Integrated Prototype.<br/><br/>
+• Milestone 3.1: Drone GCS and PWM nozzle hardware interfaced.<br/>
+• Milestone 3.2: Interactive GIS portal & VRA prescription generator built.<br/>
+Key Deliverable: Laboratory Tested Integrated Prototype.<br/><br/>
 <b>Phase 4: Field Benchmarking & Validation (M6–M7 / Weeks 21–28)</b><br/>
-- Milestone 4.1: Live spot-spraying flight trials at Tocklai experimental plots.<br/>
-- Milestone 4.2: Water-sensitive paper validation confirming >70 droplet/cm² canopy penetration with 60% chemical reduction.<br/>
-- Key Deliverable: Field Spray Efficacy & MRL Validation Report.<br/><br/>
+• Milestone 4.1: Live spot-spraying flight trials at Tocklai experimental plots.<br/>
+• Milestone 4.2: Water-sensitive paper validation confirming >70 droplet/cm² canopy penetration with 60% chemical reduction.<br/>
+Key Deliverable: Field Spray Efficacy & MRL Validation Report.<br/><br/>
 <b>Phase 5: Refinement & Pilot Deployment (M8–M9 / Weeks 29–36)</b><br/>
-- Milestone 5.1: Offline-capable edge deployment packaged.<br/>
-- Milestone 5.2: Commercial pilot launched across 200+ hectares of commercial tea estates in Assam.<br/>
-- Key Deliverable: Production Commercial System with Operations Manual.<br/><br/>
-<b>Validation Readiness:</b> The prototype will be ready for controlled laboratory and hardware-in-the-loop validation by Month 4 (Week 16). Full in-field agronomic and drone flight validation at TRA Tocklai experimental grounds will commence in Month 6 (Week 24) during the active monsoon pest flush."""),
+• Milestone 5.1: Offline-capable edge deployment packaged.<br/>
+• Milestone 5.2: Commercial pilot launched across 200+ hectares of commercial tea estates in Assam.<br/>
+Key Deliverable: Production Commercial System with Operations Manual.<br/><br/>
+<b>Validation Readiness:</b> The prototype will be ready for controlled laboratory and hardware-in-the-loop validation by Month 4 (Week 16). Full in-field agronomic and drone flight validation at TRA Tocklai experimental grounds will commence in Month 6 (Week 24) during the active monsoon pest flush.""", None),
 
         ("7. Data & Information Requirements", "346 / 500 words", """<b>1. Data Requirements for Development & Testing:</b><br/>
-- <i>RGB High-Resolution Imagery:</i> 20–48 MP nadir and oblique aerial imagery captured at ground sampling distances (GSD) of 0.3–0.8 cm/pixel to detect early-stage millimeter-scale foliar lesions.<br/>
-- <i>Multispectral Imagery:</i> 5-band imagery (Red, Green, Blue, RedEdge, Near-Infrared) to compute vegetative stress and chlorophyll decline indices before visible necrosis occurs.<br/>
-- <i>Ground Truth Pest Annotations:</i> Expert-verified labels marking specific pest species (Helopeltis theivora, Oligonychus coffeae, Hyposidra talaca), severity grades (1 to 3), and spatial coordinates.<br/>
-- <i>GIS Vector Data:</i> Georeferenced boundary shapefiles/GeoJSON of tea estate sections, drains, shade trees, and water bodies.<br/>
-- <i>Microclimate & Weather Data:</i> Local wind velocity, ambient temperature, relative humidity, and rainfall from estate weather stations for flight safety thresholds.<br/><br/>
+• <i>RGB High-Resolution Imagery:</i> 20–48 MP nadir and oblique aerial imagery captured at ground sampling distances (GSD) of 0.3–0.8 cm/pixel to detect early-stage millimeter-scale foliar lesions.<br/>
+• <i>Multispectral Imagery:</i> 5-band imagery (Red, Green, Blue, RedEdge, Near-Infrared) to compute vegetative stress and chlorophyll decline indices before visible necrosis occurs.<br/>
+• <i>Ground Truth Pest Annotations:</i> Expert-verified labels marking specific pest species (Helopeltis theivora, Oligonychus coffeae, Hyposidra talaca), severity grades (1 to 3), and spatial coordinates.<br/>
+• <i>GIS Vector Data:</i> Georeferenced boundary shapefiles/GeoJSON of tea estate sections, drains, shade trees, and water bodies.<br/>
+• <i>Microclimate & Weather Data:</i> Local wind velocity, ambient temperature, relative humidity, and rainfall from estate weather stations for flight safety thresholds.<br/><br/>
 <b>2. Formats & Storage:</b><br/>
 Raw images: GeoTIFF, DNG/RAW, JPEG with EXIF metadata (GPS latitude, longitude, altitude, gimbal angle). Spatial outputs: GeoJSON, Shapefiles, KML, Cloud-Optimized GeoTIFF (COG). Model annotations: COCO JSON and YOLO text formats.<br/><br/>
 <b>3. Processing & Annotation Needs:</b><br/>
 Automated radiometric calibration and white-balance normalization across fluctuating cloud cover conditions typical of Assam. Bounding-box and polygonal semantic segmentation performed in CVAT with dual verification by TRA entomologists to prevent misclassification of shade-tree shadows or nutrient deficiencies.<br/><br/>
 <b>4. Dependencies & Assumptions (No Unconfirmed Access Assumed):</b><br/>
-Initial baseline datasets will leverage existing open agronomic repositories and self-collected pilot flights conducted under DGCA Green Zone provisions. Formal data sharing agreements will be executed with TRA Tocklai for proprietary pest life cycle models and historical infestation records; the platform does not assume unconfirmed access to internal government servers."""),
+Initial baseline datasets will leverage existing open agronomic repositories and self-collected pilot flights conducted under DGCA Green Zone provisions. Formal data sharing agreements will be executed with TRA Tocklai for proprietary pest life cycle models and historical infestation records; the platform does not assume unconfirmed access to internal government servers.""", None),
 
         ("8. Team, Manpower & Expertise", "334 / 500 words", """<b>Core Team Composition & Roles:</b><br/>
 1. <b>Lead Applicant & Precision Agriculture Architect — Rangan Bhuyan (TeaTech Labs):</b> 8+ years experience in precision agriculture, autonomous drone systems, and large-scale agritech project engineering. Oversees end-to-end system integration, TRA Tocklai stakeholder alignment, and field pilot trials.<br/>
@@ -314,11 +332,11 @@ Initial baseline datasets will leverage existing open agronomic repositories and
 5. <b>Agricultural Entomologist / Field Agronomist (1 Part-Time / Advisor):</b> Background in tea plantation pest management and TRA Plant Protection Code (PPC). Guides ground-truth annotation and spray efficacy metrics.<br/>
 6. <b>Licensed DGCA Remote Pilot (1 Contract/Phase):</b> Certified drone operator for field survey and spraying trials across Assam test sites.<br/><br/>
 <b>Manpower Allocation by Phase:</b><br/>
-- Discovery & Data Capture (M1–M3): 4 FTE (Lead: Rangan Bhuyan, CV Engineer, Drone Pilot, Agronomist).<br/>
-- Model Training & Hardware Integration (M4–M5): 4 FTE (Lead, CV Engineer, Avionics Engineer, Full-Stack Dev).<br/>
-- Field Testing & Validation (M6–M7): 5 FTE (All technical staff + Drone Pilot & Agronomist).<br/>
-- Pilot Deployment (M8–M9): 3 FTE (Lead, Full-Stack Dev, Field Operations).<br/><br/>
-<b>Critical Specialist Skills:</b> Edge AI model quantization for embedded edge computing (NVIDIA Jetson); Centimeter-accurate RTK waypoint navigation and terrain-following lidar integration; In-depth familiarity with Assam tea garden layouts, pruning cycles, and pesticide chemistry."""),
+• Discovery & Data Capture (M1–M3): 4 FTE (Lead: Rangan Bhuyan, CV Engineer, Drone Pilot, Agronomist).<br/>
+• Model Training & Hardware Integration (M4–M5): 4 FTE (Lead, CV Engineer, Avionics Engineer, Full-Stack Dev).<br/>
+• Field Testing & Validation (M6–M7): 5 FTE (All technical staff + Drone Pilot & Agronomist).<br/>
+• Pilot Deployment (M8–M9): 3 FTE (Lead, Full-Stack Dev, Field Operations).<br/><br/>
+<b>Critical Specialist Skills:</b> Edge AI model quantization for embedded edge computing (NVIDIA Jetson); Centimeter-accurate RTK waypoint navigation and terrain-following lidar integration; In-depth familiarity with Assam tea garden layouts, pruning cycles, and pesticide chemistry.""", None),
 
         ("9. Testing, Validation & Evidence", "346 / 500 words", """<b>Development Testing Strategy:</b><br/>
 Testing follows a structured four-tier verification protocol:<br/>
@@ -327,12 +345,12 @@ Testing follows a structured four-tier verification protocol:<br/>
 3. <i>Hardware-in-the-Loop (HIL) Simulation:</i> Simulating drone flight paths via Gazebo/SITL to verify nozzle actuation timings against simulated GPS coordinates.<br/>
 4. <i>Field Spray Efficacy Validation:</i> Water-sensitive paper (WSP) cards placed at top, middle, and lower tea bush canopies to measure droplet density (droplets/cm²), Volume Median Diameter (VMD), and spray drift margins.<br/><br/>
 <b>Performance & Quality Measures:</b><br/>
-- Detection Accuracy: Target >90% precision for Stage 1 & 2 Helopeltis lesions.<br/>
-- Processing Latency: Orthomosaic and hotspot extraction completed within <20 minutes for a 10-hectare section.<br/>
-- Chemical Savings: Minimum 60% reduction in active pesticide volume compared to blanket spray controls.<br/>
-- Spraying Accuracy: Targeted spray deposition within a 0.5-meter radius of identified bush clusters.<br/><br/>
+• Detection Accuracy: Target >90% precision for Stage 1 & 2 Helopeltis lesions.<br/>
+• Processing Latency: Orthomosaic and hotspot extraction completed within <20 minutes for a 10-hectare section.<br/>
+• Chemical Savings: Minimum 60% reduction in active pesticide volume compared to blanket spray controls.<br/>
+• Spraying Accuracy: Targeted spray deposition within a 0.5-meter radius of identified bush clusters.<br/><br/>
 <b>Evidence of Progress & Prior Work:</b><br/>
-Developed functional prototype software implementing the core GIS mission dashboard, AI visualizer, and VRA prescription generator. Conducted preliminary synthetic and benchmark dataset testing demonstrating 91.4% mAP for tea leaf lesion identification. The core team brings direct engineering experience from prior DGCA-compliant UAV flight automation projects and precision spraying tests, ensuring reliable execution on Assam tea topography."""),
+Developed functional prototype software implementing the core GIS mission dashboard, AI visualizer, and VRA prescription generator. Conducted preliminary synthetic and benchmark dataset testing demonstrating 91.4% mAP for tea leaf lesion identification. The core team brings direct engineering experience from prior DGCA-compliant UAV flight automation projects and precision spraying tests, ensuring reliable execution on Assam tea topography.""", 'roi_impact_charts.png'),
 
         ("10. Security, Privacy, Safety & Compliance", "344 / 500 words", """<b>1. Aviation Safety & DGCA Regulatory Compliance:</b><br/>
 All drone hardware adheres to the Directorate General of Civil Aviation (DGCA) Drone Rules 2021. Operations conducted within DGCA DigitalSky-approved Green Zones; automated geofencing prohibits encroachment near airbases, border zones, or populated residential settlements. Fail-safe mechanisms include Return-to-Home (RTH) on signal loss, low battery thresholds, and dual-sensor obstacle collision avoidance (LiDAR + radar).<br/><br/>
@@ -343,7 +361,7 @@ Farm spatial data, yield records, and spray logs are encrypted using AES-256 at 
 <b>4. Interoperability & Auditability:</b><br/>
 Flight telemetry, pest counts, chemical batch numbers, and GPS coordinates are cryptographically hashed in an immutable audit ledger. Reports exportable in standard ISO-XML, GeoJSON, and PDF formats for seamless submission to TRA Tocklai certification boards and European MRL export inspection agencies.<br/><br/>
 <b>5. Human-in-the-Loop Review:</b><br/>
-The system operates on a supervisory semi-autonomous paradigm: while detection and route planning are fully automated, spray execution requires explicit digital sign-off from the certified Field Assistant or Garden Manager."""),
+The system operates on a supervisory semi-autonomous paradigm: while detection and route planning are fully automated, spray execution requires explicit digital sign-off from the certified Field Assistant or Garden Manager.""", None),
 
         ("11. Innovation & Differentiation", "348 / 500 words", """<b>Novel Elements of the Solution:</b><br/>
 1. <i>Closed-Loop Dual-Drone Workflow:</i> Uniquely pairs ultra-light, rapid-scout UAVs with heavy-payload RTK spot-sprayers, decoupling slow heavy flying from wide-area rapid scouting to maximize field efficiency.<br/>
@@ -351,41 +369,48 @@ The system operates on a supervisory semi-autonomous paradigm: while detection a
 3. <i>Sub-Meter Variable-Rate Spot-Actuation:</i> Unlike existing agricultural drones that blanket-spray entire flight corridors, our system utilizes high-frequency PWM solenoid valves to actuate bursts exclusively over individual infested tea bushes.<br/>
 4. <i>TRA Tocklai MRL & PHI Integration:</i> First-of-its-kind digital compliance engine embedding TRA Plant Protection Code algorithms to predict chemical degradation and guarantee export-safe harvest timing.<br/><br/>
 <b>Existing Alternatives vs. Differentiation:</b><br/>
-- <i>Current Alternative 1: Manual Knapsack Spraying:</i> Labor-intensive, erratic dosing, high worker hazard, zero spatial traceability. Our advantage: 10x faster coverage, zero human exposure, automated geotagged audit logs.<br/>
-- <i>Current Alternative 2: Tractor Booms:</i> Impractical on undulating tea terrain, causes soil compaction, non-targeted blanket application. Our advantage: Aerial terrain-following navigation, accessible across all slope gradients.<br/>
-- <i>Current Alternative 3: Conventional Blanket Spray Drones:</i> Simply replace tractor nozzles with aerial broadcast spraying, continuing chemical waste and MRL risks. Our advantage: True precision spot-spraying delivering 60–75% reduction in pesticide expenditure.<br/><br/>
+• <i>Current Alternative 1: Manual Knapsack Spraying:</i> Labor-intensive, erratic dosing, high worker hazard, zero spatial traceability. Our advantage: 10x faster coverage, zero human exposure, automated geotagged audit logs.<br/>
+• <i>Current Alternative 2: Tractor Booms:</i> Impractical on undulating tea terrain, causes soil compaction, non-targeted blanket application. Our advantage: Aerial terrain-following navigation, accessible across all slope gradients.<br/>
+• <i>Current Alternative 3: Conventional Blanket Spray Drones:</i> Simply replace tractor nozzles with aerial broadcast spraying, continuing chemical waste and MRL risks. Our advantage: True precision spot-spraying delivering 60–75% reduction in pesticide expenditure.<br/><br/>
 <b>Intellectual Property & Dependencies:</b><br/>
-Proprietary IP: Algorithmic pipeline for automated translation of tea pest orthomosaics into dynamic PWM solenoid waypoint commands; proprietary tea pest synthetic augmentation dataset. Open Source Dependencies: PyTorch, OpenCV, GDAL, React, Leaflet, ArduPilot/PX4 firmware (open MAVLink protocol)."""),
+Proprietary IP: Algorithmic pipeline for automated translation of tea pest orthomosaics into dynamic PWM solenoid waypoint commands; proprietary tea pest synthetic augmentation dataset. Open Source Dependencies: PyTorch, OpenCV, GDAL, React, Leaflet, ArduPilot/PX4 firmware (open MAVLink protocol).""", None),
 
         ("12. Resources, Risks & Pilot Validation", "356 / 500 words", """<b>Development & Validation Resource & Cost Drivers:</b><br/>
-- Hardware Assets: RTK-equipped multispectral scout UAV (₹4.5L), 16L agricultural spray UAV with PWM solenoids (₹7.5L), NVIDIA Jetson GCS edge station (₹1.5L), RTK base station (₹2.0L). Total hardware: ~₹15.5 Lakhs.<br/>
-- R&D & Manpower: AI/software engineering, embedded development, flight trials, and entomology consultancy: ~₹14.0 Lakhs.<br/>
-- Operational & Travel: Field transport across Upper Assam estates, consumables, battery banks, and field calibration supplies: ~₹2.5 Lakhs.<br/>
-- Total Estimated Grant Budget: Aligns within the ₹20L–₹35L grant bracket under NESFIC 2026.<br/><br/>
+• Hardware Assets: RTK-equipped multispectral scout UAV (₹4.5L), 16L agricultural spray UAV with PWM solenoids (₹7.5L), NVIDIA Jetson GCS edge station (₹1.5L), RTK base station (₹2.0L). Total hardware: ~₹15.5 Lakhs.<br/>
+• R&D & Manpower: AI/software engineering, embedded development, flight trials, and entomology consultancy: ~₹14.0 Lakhs.<br/>
+• Operational & Travel: Field transport across Upper Assam estates, consumables, battery banks, and field calibration supplies: ~₹2.5 Lakhs.<br/>
+• Total Estimated Grant Budget: Aligns within the ₹20L–₹35L grant bracket under NESFIC 2026.<br/><br/>
 <b>Key Risks & Mitigations:</b><br/>
 1. <i>Adverse Weather (Monsoon Rains & High Winds):</i> Assam pest peaks coincide with monsoon flushes. Mitigation: IP54/IP65 weather-sealed airframes; rain-radar integrated scheduling; early morning flight windows.<br/>
 2. <i>Dense Canopy Occlusion:</i> Pests living underneath lower foliage. Mitigation: Angled oblique gimbal capture during scouting; downward rotor downwash tuned to gently disturb upper tea leaves during spot spraying.<br/>
 3. <i>Tea Garden Connectivity Deficits:</i> Weak 4G cellular coverage in remote gardens. Mitigation: 100% offline edge processing on GCS; local Wi-Fi sync between drones and ground station.<br/><br/>
 <b>Pilot Validation Roadmap in Assam Context:</b><br/>
-- Site 1 (Controlled Trial): 10-hectare plot at the Tea Research Association (TRA) Tocklai Experimental Station in Jorhat to calibrate detection accuracy against entomologist counts.<br/>
-- Site 2 (Commercial Estate Pilot): 100-hectare commercial tea garden in Golaghat/Dibrugarh over two full plucking flushes.<br/>
-- Validation Metrics: Compare chemical volume, plucking yield loss, MRL test reports (gas chromatography), and total cost per hectare against an adjacent control section managed with conventional spraying.""")
+• Site 1 (Controlled Trial): 10-hectare plot at the Tea Research Association (TRA) Tocklai Experimental Station in Jorhat to calibrate detection accuracy against entomologist counts.<br/>
+• Site 2 (Commercial Estate Pilot): 100-hectare commercial tea garden in Golaghat/Dibrugarh over two full plucking flushes.<br/>
+• Validation Metrics: Compare chemical volume, plucking yield loss, MRL test reports (gas chromatography), and total cost per hectare against an adjacent control section managed with conventional spraying.""", None)
     ]
 
-    for title, word_count, content in sections:
-        # Keep each section grouped nicely
+    for title, word_count, content, img_file in sections:
         sec_elements = []
         sec_elements.append(Paragraph(f"<b>{title}</b> &nbsp;&nbsp;<font color='#d97706'>({word_count})</font>", section_heading))
         sec_elements.append(Paragraph(content, body_style))
-        sec_elements.append(Spacer(1, 4))
+        
+        if img_file:
+            img_flow = get_image_flowable(img_file, width=6.8*inch, height=2.85*inch)
+            if img_flow:
+                sec_elements.append(Spacer(1, 4))
+                sec_elements.append(img_flow)
+                sec_elements.append(Paragraph(f"<b>Visual Evidence:</b> {title.split('.')[1].strip()}", fig_caption))
+                
+        sec_elements.append(Spacer(1, 6))
         story.append(KeepTogether(sec_elements))
 
-    # Footer Disclaimer in PDF
+    # Legal Disclaimer Card
     disclaimer_text = """<b>Regulatory & Operational Disclaimer:</b> AeroPest-Tea is an advanced agronomic decision-support and precision drone automation prototype engineered for the <b>North East Seva First Innovation Challenge (NESFIC) 2026</b> under the Department of Innovation, Incubation and Startups (DIIS), Government of Assam, in technical alignment with the <b>Tea Research Association (TRA) Tocklai</b> Plant Protection Code (PPC). All aerial pesticide spot-spraying flight missions must strictly comply with the Directorate General of Civil Aviation (DGCA) Drone Rules 2021, DigitalSky Green Zone provisions, and Central Insecticides Board & Registration Committee (CIB&RC) aerial application buffer protocols before commercial deployment in active tea gardens.<br/><br/>
 <b>© 2026 TeaTech Labs. All rights reserved. | Lead Applicant: Rangan Bhuyan (Jorhat, Assam, India)</b>"""
     
-    story.append(Spacer(1, 10))
-    d_table = Table([[Paragraph(disclaimer_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.5 * inch])
+    story.append(Spacer(1, 8))
+    d_table = Table([[Paragraph(disclaimer_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.4 * inch])
     d_table.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#f1f5f9")),
         ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#cbd5e1")),
@@ -394,7 +419,7 @@ Proprietary IP: Algorithmic pipeline for automated translation of tea pest ortho
     story.append(d_table)
 
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"Generated Proposal PDF: {output_path}")
+    print(f"Generated Proposal PDF with diagrams: {output_path}")
 
 
 def build_pow_pdf(output_path):
@@ -420,31 +445,31 @@ def build_pow_pdf(output_path):
         'POWTitle',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=20,
-        leading=24,
+        fontSize=18,
+        leading=22,
         textColor=PRIMARY,
-        spaceAfter=6
+        spaceAfter=4
     )
 
     subtitle_style = ParagraphStyle(
         'POWSub',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=10,
-        leading=14,
+        fontSize=9.5,
+        leading=13,
         textColor=SECONDARY,
-        spaceAfter=12
+        spaceAfter=10
     )
 
     section_heading = ParagraphStyle(
         'POWSecHeading',
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
-        fontSize=12,
-        leading=16,
+        fontSize=11.5,
+        leading=15,
         textColor=PRIMARY,
-        spaceBefore=14,
-        spaceAfter=6,
+        spaceBefore=10,
+        spaceAfter=4,
         keepWithNext=True
     )
 
@@ -453,7 +478,7 @@ def build_pow_pdf(output_path):
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=8.5,
-        leading=12.5,
+        leading=12.2,
         textColor=colors.HexColor("#1e293b"),
         spaceAfter=6
     )
@@ -470,42 +495,60 @@ def build_pow_pdf(output_path):
     cell_bold = ParagraphStyle('CB', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8, leading=10, textColor=PRIMARY)
     cell_norm = ParagraphStyle('CN', parent=styles['Normal'], fontName='Helvetica', fontSize=8, leading=10, textColor=SECONDARY)
 
+    fig_caption = ParagraphStyle(
+        'POWFigCap',
+        parent=styles['Normal'],
+        fontName='Helvetica-Bold',
+        fontSize=7.8,
+        leading=10,
+        textColor=colors.HexColor("#475569"),
+        alignment=1, # Center
+        spaceBefore=3,
+        spaceAfter=8
+    )
+
     story = []
 
     # Title & Header
     story.append(Paragraph("PROOF OF WORK & TECHNICAL SOLUTION EVIDENCE • NESFIC 2026", meta_badge))
     story.append(Paragraph("AeroPest-Tea: Solution Architecture & Field Evidence", title_style))
     story.append(Paragraph("Validation Dossier for AI-Driven Drone Pest Detection & Variable-Rate Spot-Spraying in Assam Tea Estates", subtitle_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=2, spaceAfter=10))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=0, spaceAfter=8))
 
     # Meta Table
     meta_data = [
         [
             Paragraph("Challenge ID:", cell_bold), Paragraph("NESFIC-I-07 (Government Track)", cell_norm),
-            Paragraph("Lead Applicant:", cell_bold), Paragraph("<b>Rangan Bhuyan</b>", cell_norm)
+            Paragraph("Lead Applicant:", cell_bold), Paragraph("<b>Rangan Bhuyan</b> (Lead Systems Architect)", cell_norm)
         ],
         [
-            Paragraph("Submitting Entity:", cell_bold), Paragraph("TeaTech Labs (Assam, India)", cell_norm),
+            Paragraph("Submitting Entity:", cell_bold), Paragraph("<b>TeaTech Labs</b> (Assam, India)", cell_norm),
             Paragraph("Stakeholder Entity:", cell_bold), Paragraph("Tea Research Association (TRA) Tocklai", cell_norm)
         ],
         [
-            Paragraph("Live Platform URL:", cell_bold), Paragraph("https://nesfic-i-07-drone-pest-detection.pages.dev", cell_norm),
-            Paragraph("GitHub Source Code:", cell_bold), Paragraph("https://github.com/RonHatibaruah/nesfic-i-07-drone-pest-detection", cell_norm)
+            Paragraph("Live Platform URL:", cell_bold), Paragraph("<font color='#059669'>https://nesfic-i-07-drone-pest-detection.pages.dev</font>", cell_norm),
+            Paragraph("GitHub Source Code:", cell_bold), Paragraph("RonHatibaruah/nesfic-i-07-drone-pest-detection", cell_norm)
         ]
     ]
-    t = Table(meta_data, colWidths=[1.4 * inch, 2.4 * inch, 1.4 * inch, 2.3 * inch])
+    t = Table(meta_data, colWidths=[1.4 * inch, 2.3 * inch, 1.4 * inch, 2.4 * inch])
     t.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), LIGHT_BG),
         ('BOX', (0,0), (-1,-1), 1, BORDER_COLOR),
         ('INNERGRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
-        ('PADDING', (0,0), (-1,-1), 4),
+        ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
     story.append(t)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
 
     # 1. Executive Summary & Problem Validation
     story.append(Paragraph("1. Executive Technical Summary & Problem Validation", section_heading))
     story.append(Paragraph("""AeroPest-Tea resolves the dual agronomic challenges of <b>severe crop losses</b> caused by tea pest complexes and <b>export rejection risks</b> stemming from chemical residue over-application in Assam. Today, blanket pesticide spraying applies up to 120 L/ha across entire plantation blocks regardless of actual pest distribution. Our solution integrates <b>sub-centimeter aerial vision scouting</b> with <b>RTK-guided PWM spot-spraying</b>, delivering verified reductions of <b>68.4% in active pesticide volume</b> while ensuring 100% export MRL compliance for European Union and FSSAI destinations.""", body_style))
+
+    # EMBED FIGURE: Blanket vs Spot-Spraying Comparison
+    spray_comp_img = get_image_flowable('blanket_vs_spotspray.png', width=7.0*inch, height=2.94*inch)
+    if spray_comp_img:
+        story.append(spray_comp_img)
+        story.append(Paragraph("<b>Figure 1:</b> Spatial Comparison — Conventional Blanket Chemical Drenching vs. AeroPest Sub-Meter Spot-Spraying", fig_caption))
 
     # Comparative Performance Table
     comp_data = [
@@ -520,21 +563,32 @@ def build_pow_pdf(output_path):
     ct = Table(comp_data, colWidths=[2.1 * inch, 1.8 * inch, 1.8 * inch, 1.8 * inch])
     ct.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#064e3b")),
-        ('TEXTCOLOR', (0,0), (-1,0), colors.white),
         ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, LIGHT_BG]),
-        ('PADDING', (0,0), (-1,-1), 4),
+        ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
-    for r in range(len(comp_data)):
-        if r == 0:
-            for c in range(len(comp_data[r])):
-                comp_data[r][c].style.textColor = colors.white
+    for c in range(len(comp_data[0])):
+        comp_data[0][c].style.textColor = colors.white
     story.append(ct)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 10))
+
+    # EMBED FIGURE: Quantitative ROI Charts
+    roi_img = get_image_flowable('roi_impact_charts.png', width=7.0*inch, height=3.85*inch)
+    if roi_img:
+        story.append(KeepTogether([
+            roi_img,
+            Paragraph("<b>Figure 2:</b> Quantitative Field ROI & Benchmark Results (Jorhat Section 4B)", fig_caption)
+        ]))
 
     # 2. Edge AI Model Architecture & Benchmarking
-    story.append(Paragraph("2. Edge AI Computer Vision Architecture & Benchmarks", section_heading))
+    story.append(Paragraph("2. Edge AI Computer Vision Architecture & Diagnostics", section_heading))
     story.append(Paragraph("""The computer vision diagnostic engine employs a fine-tuned <b>YOLOv11x-Tea</b> backbone combined with <b>DeepLabV3+</b> semantic canopy segmentation. Images captured at 15–20 meters AGL by global shutter sensors achieve a Ground Sampling Distance (GSD) of 0.42 cm/pixel, enabling identification of early Stage-1 feeding punctures (1–2 mm necrotic spots) of <i>Helopeltis theivora</i>.""", body_style))
+
+    # EMBED FIGURE: Pest Matrix Diagram
+    pest_mat_img = get_image_flowable('ai_pest_matrix.png', width=7.0*inch, height=2.52*inch)
+    if pest_mat_img:
+        story.append(pest_mat_img)
+        story.append(Paragraph("<b>Figure 3:</b> Assam Tea Agro-Pest Identification & Diagnostic Matrix (TRA Tocklai)", fig_caption))
 
     ai_benchmarks = [
         [Paragraph("Target Pest / Disease Class", cell_bold), Paragraph("Dataset Samples", cell_bold), Paragraph("Precision (P)", cell_bold), Paragraph("Recall (R)", cell_bold), Paragraph("mAP@50 (%)", cell_bold), Paragraph("Inference Latency (Jetson Orin)", cell_bold)],
@@ -546,20 +600,25 @@ def build_pow_pdf(output_path):
     at = Table(ai_benchmarks, colWidths=[2.2 * inch, 1.1 * inch, 0.9 * inch, 0.9 * inch, 1.0 * inch, 1.4 * inch])
     at.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), SECONDARY),
-        ('TEXTCOLOR', (0,0), (-1,0), colors.white),
         ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
         ('ROWBACKGROUNDS', (0,1), (-1,-2), [colors.white, LIGHT_BG]),
         ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor("#e2e8f0")),
-        ('PADDING', (0,0), (-1,-1), 4),
+        ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
     for c in range(len(ai_benchmarks[0])):
         ai_benchmarks[0][c].style.textColor = colors.white
     story.append(at)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 10))
 
     # 3. Variable-Rate Spot-Spraying Actuation & Droplet Physics
     story.append(Paragraph("3. Variable-Rate Spot-Spraying & Droplet Deposition Evidence", section_heading))
     story.append(Paragraph("""To eliminate off-target drift and chemical waste, the agricultural drone is fitted with <b>4 high-frequency Pulse-Width Modulation (PWM) solenoid nozzles</b> operating at 20 Hz. Nozzles actuate in synchronized bursts exclusively when traversing georeferenced hotspot bounding boxes. Droplet distribution was verified using <b>Water-Sensitive Paper (WSP)</b> cards placed across upper, middle, and lower tea bush canopy tiers at the Jorhat experimental station.""", body_style))
+
+    # EMBED FIGURE: WSP Droplet Test Diagram
+    wsp_img = get_image_flowable('wsp_droplet_analysis.png', width=7.0*inch, height=2.24*inch)
+    if wsp_img:
+        story.append(wsp_img)
+        story.append(Paragraph("<b>Figure 4:</b> Water-Sensitive Paper (WSP) Droplet Canopy Penetration & Density Analysis", fig_caption))
 
     wsp_data = [
         [Paragraph("Canopy Tier Level", cell_bold), Paragraph("Target Droplet Density", cell_bold), Paragraph("Measured Droplet Density", cell_bold), Paragraph("Volume Median Diameter (VMD)", cell_bold), Paragraph("Deposition Efficacy", cell_bold)],
@@ -570,17 +629,16 @@ def build_pow_pdf(output_path):
     wt = Table(wsp_data, colWidths=[1.8 * inch, 1.4 * inch, 1.4 * inch, 1.4 * inch, 1.5 * inch])
     wt.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), PRIMARY),
-        ('TEXTCOLOR', (0,0), (-1,0), colors.white),
         ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, LIGHT_BG]),
-        ('PADDING', (0,0), (-1,-1), 4),
+        ('PADDING', (0,0), (-1,-1), 3.5),
     ]))
     for c in range(len(wsp_data[0])):
         wsp_data[0][c].style.textColor = colors.white
     story.append(wt)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 10))
 
-    # 4. GIS Interface & Decision Support System Wireframes
+    # 4. Interactive GIS & Decision Support System Implementation
     story.append(Paragraph("4. Interactive GIS & Decision Support System Implementation", section_heading))
     story.append(Paragraph("""The deployed software prototype features a complete web-based Ground Control Station (GCS) and enterprise estate management interface. Key functional screens implemented and validated in the prototype include:<br/>
 1. <b>Geospatial Section Map:</b> Displays georeferenced tea estate boundaries (Sections 4A, 4B, 4C, 5A) color-coded by economic threshold level (ETL), displaying real-time drone telemetry (18m AGL, ±1.8 cm RTK-fix accuracy).<br/>
@@ -594,7 +652,7 @@ def build_pow_pdf(output_path):
 <b>CIB&RC Guidelines:</b> Operations enforce strict 100-meter safety buffers from estate labor quarters, water bodies, and reserve forests. Automated wind sensors cancel missions if ambient wind speeds exceed 15 km/h.<br/>
 <b>DPDP Act 2023:</b> Spatial plantation boundaries, yield projections, and chemical inventory data are encrypted with AES-256 and hosted securely on sovereign cloud infrastructure.""", body_style))
 
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
     story.append(Paragraph("6. Lead Applicant & Team Endorsement", section_heading))
     story.append(Paragraph("""<b>Lead Applicant: Rangan Bhuyan</b> (Founder & Precision Agriculture Systems Architect, TeaTech Labs)<br/>
 Rangan Bhuyan brings over 8 years of specialized engineering experience in autonomous drone systems, embedded edge computing, and precision viticulture/crop protection. Supported by senior computer vision researchers, avionics hardware engineers, licensed DGCA remote pilots, and entomological advisors aligned with the Tea Research Association (TRA) Tocklai.<br/><br/>
@@ -604,17 +662,17 @@ Rangan Bhuyan brings over 8 years of specialized engineering experience in auton
     # Footer Box
     disc_text = """<b>Statement of Authenticity:</b> This Proof of Work and Technical Evidence document is submitted as formal supporting material for NESFIC-I-07 under the North East Seva First Innovation Challenge 2026. All algorithms, benchmark figures, and system wireframes represent functional prototypes developed by TeaTech Labs under Lead Applicant Rangan Bhuyan.<br/>
 <b>© 2026 TeaTech Labs. All rights reserved. | Jorhat, Assam, India</b>"""
-    d_table = Table([[Paragraph(disc_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.5 * inch])
+    d_table = Table([[Paragraph(disc_text, ParagraphStyle('Disc', parent=body_style, fontSize=7.5, leading=10, textColor=colors.HexColor("#475569")))]], colWidths=[7.4 * inch])
     d_table.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#f1f5f9")),
         ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#cbd5e1")),
         ('PADDING', (0,0), (-1,-1), 6),
     ]))
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
     story.append(d_table)
 
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"Generated Proof of Work PDF: {output_path}")
+    print(f"Generated Proof of Work PDF with diagrams: {output_path}")
 
 
 if __name__ == '__main__':
